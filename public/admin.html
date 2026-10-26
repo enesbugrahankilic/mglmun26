@@ -2,154 +2,467 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>MGLMUN'26 · Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#500809">
+<meta name="color-scheme" content="light">
+<title>MGLMUN’26 · Admin</title>
 <link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#f7f3ee;--paper:#fffdfa;--ink:#1d1213;--soft:#7c6e6b;--line:#e3d9cd;--wine:#500809;--gold:#cfc9c6;
- --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
-header{background:#500809;color:#f3e7d6}
-header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(16px,env(safe-area-inset-left))}
-.brand{display:flex;gap:10px;align-items:center;font:600 20px/1 var(--display)}.brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1.5px #cfc9c6}
-.w{max-width:1280px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
-button,select,input{font:inherit}
-.btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
-.btn.wine{background:var(--wine);border-color:var(--wine);color:#fff}
-header .btn{background:transparent;color:#f3e7d6;border-color:rgba(243,231,214,.4)}
-.login{max-width:380px;margin:80px auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;gap:14px}
-.login h1{font:600 32px/1 var(--display);margin:0}
-.login label{display:grid;gap:6px;font-weight:600;font-size:14px}
-.login input{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
-.err{color:#b3261e;font-size:14px;min-height:1em;margin:0}
-.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0}
-@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.stat b{display:block;font:600 34px/1 var(--display);font-variant-numeric:tabular-nums}.stat small{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
-.bar input,.bar select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--paper)}
-.bar input{flex:1;min-width:200px}
-.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-tr.r{cursor:pointer}tr.r:hover td{background:#fbf6ee}
-.pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px}
-.s-pending{background:#f3ead9;color:#7a5a1e}.s-reviewed{background:#e5ecf6;color:#25456e}.s-accepted{background:#e3f1e4;color:#1f5a2a}.s-rejected{background:#f6e3e3;color:#8a1f1f}
-.k{font-size:12px;color:var(--soft)}
-dialog{border:0;border-radius:14px;padding:0;max-width:760px;width:calc(100% - 32px)}
-dialog::backdrop{background:rgba(20,6,8,.55)}
-.dlg{padding:24px;display:grid;gap:14px}
-.dlg h2{font:600 30px/1.1 var(--display);margin:0}
-.grid{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;font-size:14px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.grid dt{color:var(--soft)}.grid dd{margin:0;white-space:pre-wrap;word-break:break-word}
-.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:14px}
-textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;min-height:70px;font:inherit}
-.empty{padding:40px;text-align:center;color:var(--soft)}
+:root{
+  --maroon:#500809;--maroon-3:#7a1b24;--night:#2a0405;
+  --bg:#f4efe9;--paper:#fffdfa;--sand:#efe8df;--line:#e3d9cd;--line-2:#d3c6b7;
+  --ink:#1d1213;--ink-2:#4f4140;--ink-3:#7c6e6b;--silver:#cfc9c6;--on-dark:#f4ece6;--on-dark-2:#cdbdb7;
+  --pending:#8a6414;--pending-bg:#f6ecd6;--reviewed:#25456e;--reviewed-bg:#e3ebf6;--accepted:#1f6b3a;--accepted-bg:#e1f0e5;--rejected:#8d1d1d;--rejected-bg:#f6e2e0;
+  --serif:"Fraunces",Georgia,serif;--sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --top:60px;
+}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:14.5px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--maroon-3);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;letter-spacing:-.01em}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);font-weight:600;font-size:13.5px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--maroon);color:var(--maroon)}
+.btn.primary{background:var(--maroon);border-color:var(--maroon);color:var(--on-dark)}
+.btn.primary:hover{background:var(--maroon-3);color:#fff}
+.btn.dark{background:transparent;border-color:rgba(207,201,198,.35);color:var(--on-dark)}
+.btn.dark:hover{border-color:var(--on-dark)}
+.btn[disabled]{opacity:.55;cursor:default}
+
+/* login */
+.login-wrap{min-height:100%;display:grid;place-items:center;padding:24px;background:var(--maroon);background-image:radial-gradient(60% 70% at 70% 20%,rgba(122,27,36,.8),transparent 70%)}
+.login{width:100%;max-width:380px;background:var(--paper);border-radius:20px;padding:32px 28px;display:grid;gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.login img{width:72px;height:72px;border-radius:50%;margin:0 auto 4px}
+.login h1{font-size:28px;text-align:center}
+.login p.sub{margin:-8px 0 6px;text-align:center;color:var(--ink-3)}
+.login label{display:grid;gap:6px;font-weight:600;font-size:13.5px}
+.login input{min-height:46px;border:1px solid var(--line-2);border-radius:10px;padding:0 12px;background:var(--bg);font-size:16px}
+.login input:focus{outline:none;border-color:var(--maroon-3);box-shadow:0 0 0 3px rgba(122,27,36,.14);background:var(--paper)}
+.login .btn{min-height:46px;font-size:15px}
+.err{color:#b3261e;font-size:13.5px;margin:0}.err:empty{display:none}
+
+/* app shell */
+.top{position:sticky;top:0;z-index:20;height:var(--top);background:var(--maroon);color:var(--on-dark);display:flex;align-items:center;gap:12px;padding:0 16px}
+.brand{display:flex;align-items:center;gap:10px;font:600 18px/1 var(--serif);margin-right:8px}
+.brand img{width:32px;height:32px;border-radius:50%}
+.tabs{display:flex;gap:2px}
+.tabs button{border:0;background:none;color:var(--on-dark-2);font-weight:600;padding:8px 12px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected=true]{background:rgba(255,255,255,.12);color:#fff}
+.top .sp{flex:1}
+.who{font-size:12.5px;color:var(--on-dark-2);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:760px){.who,.top .hide-s{display:none}.brand span{display:none}}
+
+/* applications view: list + detail */
+.app{display:grid;grid-template-columns:400px minmax(0,1fr);height:calc(100% - var(--top))}
+.list{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:var(--paper)}
+.filters{padding:14px 14px 10px;display:grid;gap:10px;border-bottom:1px solid var(--line)}
+.search{position:relative}
+.search input{width:100%;min-height:40px;border:1px solid var(--line-2);border-radius:10px;padding:0 12px 0 34px;background:var(--bg)}
+.search input:focus{outline:none;border-color:var(--maroon-3);background:var(--paper)}
+.search svg{position:absolute;left:11px;top:12px;color:var(--ink-3)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{border:1px solid var(--line-2);background:var(--paper);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink-2)}
+.chips button b{font-weight:600;color:var(--ink-3);margin-left:4px;font-variant-numeric:tabular-nums}
+.chips button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chips button[aria-pressed=true] b{color:var(--silver)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row2 select{min-height:36px;border:1px solid var(--line-2);border-radius:10px;padding:0 8px;background:var(--paper);font-size:13px}
+.count{padding:8px 16px;font-size:12px;color:var(--ink-3);border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.items{flex:1;overflow:auto;list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer;border-left:3px solid transparent}
+.item:hover{background:#fbf7f2}
+.item[aria-selected=true]{background:var(--sand);border-left-color:var(--maroon)}
+.item .n{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .d{font-size:12px;color:var(--ink-3);text-align:right;white-space:nowrap}
+.item .s{font-size:12.5px;color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .p{grid-column:1/-1;display:flex;gap:6px;align-items:center;margin-top:4px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st-pending{background:var(--pending-bg);color:var(--pending)}.st-reviewed{background:var(--reviewed-bg);color:var(--reviewed)}
+.st-accepted{background:var(--accepted-bg);color:var(--accepted)}.st-rejected{background:var(--rejected-bg);color:var(--rejected)}
+.flag{font-size:11.5px;font-weight:600;color:#9a4b00}
+.empty{padding:48px 20px;text-align:center;color:var(--ink-3)}
+
+.detail{overflow:auto;min-height:0}
+.dwrap{max-width:860px;margin:0 auto;padding:24px 28px 60px}
+.dhead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.dhead h2{font-size:34px;line-height:1.1}
+.dhead .meta{color:var(--ink-3);margin-top:6px}
+.nav2{display:flex;gap:6px}
+.back{display:none}
+.decide{margin-top:20px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:12px}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg button{min-height:42px;border:1px solid var(--line-2);border-radius:10px;background:var(--paper);font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.seg button kbd{font:600 10.5px/1 var(--sans);color:var(--ink-3);border:1px solid var(--line-2);border-radius:4px;padding:2px 4px}
+.seg button[aria-pressed=true].pending{background:var(--pending-bg);border-color:var(--pending);color:var(--pending)}
+.seg button[aria-pressed=true].reviewed{background:var(--reviewed-bg);border-color:var(--reviewed);color:var(--reviewed)}
+.seg button[aria-pressed=true].accepted{background:var(--accepted-bg);border-color:var(--accepted);color:var(--accepted)}
+.seg button[aria-pressed=true].rejected{background:var(--rejected-bg);border-color:var(--rejected);color:var(--rejected)}
+.note{display:grid;gap:6px}
+.note label{font-weight:600;font-size:13px}
+.note textarea{width:100%;min-height:64px;border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;background:var(--bg);resize:vertical}
+.note textarea:focus{outline:none;border-color:var(--maroon-3);background:var(--paper)}
+.saved{font-size:12.5px;color:var(--ink-3)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.box.full{grid-column:1/-1}
+.box h3{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;display:flex;justify-content:space-between}
+.box h3 span{letter-spacing:0;text-transform:none;font-weight:500}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:8px 12px;margin:0}
+.kv dt{color:var(--ink-3)}.kv dd{margin:0;font-weight:500;word-break:break-word}
+.kv a{color:var(--maroon-3);font-weight:600;text-decoration:none}.kv a:hover{text-decoration:underline}
+.prefs{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.prefs li{display:flex;gap:10px;align-items:center;font-weight:600}
+.prefs li i{font:normal 600 12px/1 var(--sans);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff}
+.prefs li:not(:first-child) i{background:var(--line-2);color:var(--ink)}
+.text{white-space:pre-wrap;word-break:break-word;margin:0;font-size:15px;line-height:1.65}
+.alert{background:#fff4e5;border-color:#f0d3a8}
+.consents{display:flex;flex-wrap:wrap;gap:8px}
+.yes,.no{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px}
+.yes{background:var(--accepted-bg);color:var(--accepted)}.no{background:var(--rejected-bg);color:var(--rejected)}
+.hintkeys{margin-top:18px;font-size:12px;color:var(--ink-3)}
+.hintkeys kbd{font:600 11px/1 var(--sans);border:1px solid var(--line-2);border-radius:4px;padding:2px 5px;background:var(--paper)}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .detail{position:fixed;inset:var(--top) 0 0;background:var(--bg);z-index:10;display:none}
+  .app.show .detail{display:block}
+  .back{display:inline-flex}
+  .grid{grid-template-columns:1fr}
+  .dwrap{padding:18px 16px 48px}
+  .seg button kbd{display:none}
+}
+
+/* summary view */
+.sum{height:calc(100% - var(--top));overflow:auto}
+.swrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+.swrap h2{font-size:32px}
+.swrap .lead{color:var(--ink-3);margin:6px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:800px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi b{display:block;font:500 36px/1 var(--serif);font-variant-numeric:tabular-nums}
+.kpi small{color:var(--ink-3);font-size:12.5px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+@media (max-width:800px){.cols{grid-template-columns:1fr}}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:150px 1fr 40px;gap:10px;align-items:center;font-size:13.5px}
+.bar .t{height:10px;border-radius:5px;background:var(--bg);overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--maroon);border-radius:5px}
+.bar b{text-align:right;font-variant-numeric:tabular-nums}
+table.mini{width:100%;border-collapse:collapse;font-size:13.5px}
+table.mini th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:6px 8px;border-bottom:1px solid var(--line)}
+table.mini td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+table.mini tr:last-child td{border-bottom:0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;font-size:13.5px;z-index:50;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.dl{position:relative}
+.dlm{position:absolute;right:0;top:44px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:6px;display:grid;min-width:220px;z-index:30}
+.dlm small{padding:6px 10px;color:var(--ink-3);font-size:11.5px}
+.dlm button{border:0;background:none;text-align:left;padding:9px 10px;border-radius:8px;font-weight:600;cursor:pointer}
+.dlm button:hover{background:var(--sand)}
+#print{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff}
+  body > *:not(#print){display:none!important}
+  #print{display:block;font-size:10.5pt;color:#000}
+  #print h1{font:600 18pt/1.2 var(--serif);margin:0 0 2mm}
+  #print .pm{color:#555;margin-bottom:6mm}
+  #print .app{page-break-after:always;break-after:page}
+  #print .app:last-child{page-break-after:auto;break-after:auto}
+  #print h2{font:600 16pt/1.2 var(--serif);border-bottom:1.5pt solid #500809;padding-bottom:2mm;margin:0 0 3mm}
+  #print table{width:100%;border-collapse:collapse;margin-bottom:4mm}
+  #print td,#print th{border:0.5pt solid #bbb;padding:1.6mm 2mm;vertical-align:top;text-align:left}
+  #print th{background:#f2ece6;width:32mm;font-weight:600}
+  #print thead th{width:auto}
+  #print tr{break-inside:avoid}
+  #print .tx{white-space:pre-wrap;margin:0 0 4mm;border:0.5pt solid #bbb;padding:2mm}
+  #print h3{font:600 9pt/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#555;margin:3mm 0 1.5mm}
+}
+.banner{background:#fdf1ef;border-bottom:1px solid #f0c9c5;color:#8d1d1d;padding:10px 16px;font-size:13.5px}
 </style>
 </head>
 <body>
-<header><div class="w"><div class="brand"><img src="logo.jpg" alt="">MGLMUN’26 · Admin</div><button class="btn" id="out" hidden>Çıkış yap</button></div></header>
 
-<form class="login" id="login" hidden>
-  <h1>Admin girişi</h1>
-  <label>E-posta<input type="email" id="em" autocomplete="username" required></label>
-  <label>Şifre<input type="password" id="pw" autocomplete="current-password" required></label>
-  <button class="btn wine" type="submit">Giriş yap</button>
-  <p class="err" id="lerr"></p>
-</form>
+<div class="login-wrap" id="login-wrap" hidden>
+  <form class="login" id="login">
+    <img src="logo.jpg" alt="">
+    <h1>Admin girişi</h1>
+    <p class="sub">MGLMUN’26 başvuru paneli</p>
+    <label>E-posta<input type="email" id="em" autocomplete="username" required></label>
+    <label>Şifre<input type="password" id="pw" autocomplete="current-password" required></label>
+    <button class="btn primary" type="submit" id="lbtn">Giriş yap</button>
+    <p class="err" id="lerr" role="alert"></p>
+  </form>
+</div>
 
-<main class="w" id="app" hidden>
-  <div class="stats" id="stats"></div>
-  <div class="bar">
-    <input type="search" id="q" placeholder="İsim, e-posta veya okul ara">
-    <select id="fk"><option value="">Tüm başvurular</option><option value="delegate">Delege</option><option value="board">Divan</option><option value="org">Organizasyon</option></select>
-    <select id="fs"><option value="">Tüm durumlar</option><option value="pending">Bekliyor</option><option value="reviewed">İncelendi</option><option value="accepted">Kabul</option><option value="rejected">Red</option></select>
-    <select id="fc"><option value="">Tüm komiteler (1. tercih)</option><option>WTO</option><option>UN Women</option><option>Petrograd Soviet</option><option>Any</option></select>
-    <button class="btn" id="csv">CSV indir</button>
-    <button class="btn" id="ref">Yenile</button>
+<div id="shell" hidden style="height:100%">
+  <header class="top">
+    <div class="brand"><img src="logo.jpg" alt=""><span>MGLMUN’26</span></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="apps">Başvurular</button>
+      <button role="tab" aria-selected="false" data-tab="sum">Özet</button>
+    </div>
+    <div class="sp"></div>
+    <span class="who" id="who"></span>
+    <div class="dl hide-s"><button class="btn dark" id="dlb" aria-haspopup="true" aria-expanded="false">İndir ▾</button>
+      <div class="dlm" id="dlm" hidden><small>Şu anki filtreye göre</small><button id="xlsx">Excel (.xlsx)</button><button id="pdf">PDF · tam başvurular</button><button id="pdfl">PDF · özet liste</button><button id="csv">CSV</button></div></div>
+    <button class="btn dark" id="ref" title="Yenile">↻</button>
+    <button class="btn dark" id="out">Çıkış</button>
+  </header>
+  <div class="banner" id="banner" hidden></div>
+
+  <div class="app" id="apps">
+    <aside class="list">
+      <div class="filters">
+        <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="q" placeholder="İsim, e-posta, okul veya telefon  ( / )"></div>
+        <div class="chips" id="stchips"></div>
+        <div class="row2">
+          <select id="fc" aria-label="Komite"><option value="">Tüm komiteler</option><option value="WTO">WTO</option><option value="UN Women">UN Women</option><option value="Petrograd Soviet">Petrograd Soviet</option><option value="Any">Fark etmez</option></select>
+          <select id="so" aria-label="Sıralama"><option value="new">En yeni</option><option value="old">En eski</option><option value="name">İsim (A–Z)</option><option value="school">Okul</option></select>
+        </div>
+        <label style="font-size:12.5px;color:var(--ink-2);display:flex;gap:6px;align-items:center"><input type="checkbox" id="fany"> Komite filtresinde 2. ve 3. tercihleri de say</label>
+      </div>
+      <div class="count"><span id="cnt"></span><span id="upd"></span></div>
+      <ul class="items" id="items" role="listbox" aria-label="Başvurular" tabindex="0"></ul>
+    </aside>
+    <section class="detail" id="detail" aria-live="polite"></section>
   </div>
-  <div class="tbl"><table><thead><tr><th>Tarih</th><th>Ad Soyad</th><th>Tür</th><th>Okul / Sınıf</th><th>Tercihler / Pozisyon</th><th>Durum</th></tr></thead><tbody id="rows"></tbody></table></div>
-  <p class="k" style="margin:12px 0 40px" id="foot"></p>
-</main>
 
-<dialog id="dlg"><div class="dlg">
-  <h2 id="dn"></h2>
-  <dl class="grid" id="dd"></dl>
-  <label class="k">Admin notu<textarea id="note"></textarea></label>
-  <div class="acts">
-    <select id="dst"><option value="pending">Bekliyor</option><option value="reviewed">İncelendi</option><option value="accepted">Kabul</option><option value="rejected">Red</option></select>
-    <button class="btn wine" id="save">Kaydet</button>
-    <button class="btn" id="close">Kapat</button>
-    <span class="err" id="serr"></span>
-  </div>
-</div></dialog>
+  <div class="sum" id="sum" hidden><div class="swrap" id="swrap"></div></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div id="print"></div>
 
 <script src="config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KIND={delegate:'Delege',board:'Divan',org:'Organizasyon'};
-const ST={pending:'Bekliyor',reviewed:'İncelendi',accepted:'Kabul',rejected:'Red'};
+const STATUS=[['pending','Bekliyor'],['reviewed','İncelendi'],['accepted','Kabul'],['rejected','Red']];
+const ST=Object.fromEntries(STATUS);
+const COMS=['WTO','UN Women','Petrograd Soviet','Any'];
+const comName=c=>c==='Any'?'Fark etmez':c;
 const c=window.MGLMUN_CONFIG;
-const sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_ANON_KEY);
-let all=[],cur=null;
+const sb=window.sbOverride||supabase.createClient(c.SUPABASE_URL,c.SUPABASE_ANON_KEY);
+let all=[],sel=null,stFilter='',tab='apps',me='';
 
+function toast(t){const el=$('toast');el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2200);}
+const fmt=(d,o)=>new Date(d).toLocaleString('tr-TR',o||{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const digits=p=>String(p||'').replace(/\D/g,'');
+const intlTR=p=>{let d=digits(p);if(d.startsWith('0'))d='90'+d.slice(1);else if(d.length===10)d='90'+d;return d;};
+
+/* ── auth ── */
 async function boot(){
   const {data:{session}}=await sb.auth.getSession();
-  if(session){$('login').hidden=true;$('app').hidden=false;$('out').hidden=false;load();}
-  else{$('login').hidden=false;$('app').hidden=true;$('out').hidden=true;}
+  $('login-wrap').hidden=!!session;$('shell').hidden=!session;
+  if(session){me=session.user.email;$('who').textContent=me;load();}
+  else setTimeout(()=>$('em').focus(),50);
 }
-$('login').addEventListener('submit',async e=>{e.preventDefault();$('lerr').textContent='';
+$('login').addEventListener('submit',async e=>{e.preventDefault();$('lerr').textContent='';$('lbtn').disabled=true;
   const {error}=await sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value});
-  if(error){$('lerr').textContent='E-posta veya şifre hatalı.';return;} boot();});
-$('out').onclick=async()=>{await sb.auth.signOut();boot();};
+  $('lbtn').disabled=false;
+  if(error){$('lerr').textContent='E-posta veya şifre hatalı.';return;}boot();});
+$('out').onclick=async()=>{await sb.auth.signOut();all=[];sel=null;boot();};
 
-async function load(){
-  $('foot').textContent='Yükleniyor…';
+/* ── data ── */
+async function load(keep){
+  $('cnt').textContent='Yükleniyor…';
   const {data,error}=await sb.from('applications').select('*').order('created_at',{ascending:false});
-  if(error){$('foot').textContent='Başvurular okunamadı: '+error.message;return;}
+  const b=$('banner');
+  if(error){b.hidden=false;b.textContent='Başvurular okunamadı: '+error.message;return;}
   all=data||[];
-  if(!all.length)$('foot').textContent='Henüz başvuru yok. (Başvuru olduğu halde boş görünüyorsa e-postan admins tablosunda değildir.)';
+  b.hidden=all.length>0;
+  if(!all.length)b.textContent='Henüz başvuru görünmüyor. Başvuru olduğu halde liste boşsa '+me+' adresi admins tablosunda değildir.';
+  $('upd').textContent='Güncellendi '+fmt(Date.now(),{hour:'2-digit',minute:'2-digit'});
+  if(keep&&sel)sel=all.find(r=>r.id===sel.id)||null;
   render();
 }
-function filtered(){const q=$('q').value.toLowerCase().trim(),k=$('fk').value,s=$('fs').value,cm=$('fc').value;
-  return all.filter(r=>(!k||r.kind===k)&&(!s||r.status===s)&&(!cm||r.pref1===cm)&&(!q||[r.full_name,r.email,r.school].join(' ').toLowerCase().includes(q)));}
-function render(){
-  const st=$('stats');st.innerHTML='';
-  [['Toplam',all.length],['Delege',all.filter(r=>r.kind==='delegate').length],['Divan',all.filter(r=>r.kind==='board').length],['Organizasyon',all.filter(r=>r.kind==='org').length],['Bekleyen',all.filter(r=>r.status==='pending').length]]
-   .forEach(([a,b])=>{const d=document.createElement('div');d.className='stat';d.innerHTML='<b></b><small></small>';d.querySelector('b').textContent=b;d.querySelector('small').textContent=a;st.append(d);});
-  const rows=$('rows');rows.innerHTML='';const list=filtered();
-  if(!list.length){rows.innerHTML='<tr><td colspan="6" class="empty">Gösterilecek başvuru yok.</td></tr>';}
-  list.forEach(r=>{const tr=document.createElement('tr');tr.className='r';tr.tabIndex=0;
-    const cells=[new Date(r.created_at).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'}),r.full_name+'\n'+r.email,KIND[r.kind],r.school+' · '+r.grade,r.role||[r.pref1,r.pref2,r.pref3].filter(Boolean).join(' › ')];
-    cells.forEach((t,i)=>{const td=document.createElement('td');td.textContent=t;td.style.whiteSpace=i===1?'pre-line':'';tr.append(td);});
-    const td=document.createElement('td');const p=document.createElement('span');p.className='pill s-'+r.status;p.textContent=ST[r.status];td.append(p);tr.append(td);
-    tr.onclick=()=>open(r);tr.onkeydown=e=>{if(e.key==='Enter')open(r)};rows.append(tr);});
-  if(all.length)$('foot').textContent=list.length+' / '+all.length+' başvuru gösteriliyor';
+$('ref').onclick=()=>load(true);
+
+/* ── list ── */
+function filtered(){
+  const q=$('q').value.toLocaleLowerCase('tr').trim(),cm=$('fc').value,any=$('fany').checked,so=$('so').value;
+  let l=all.filter(r=>(!stFilter||r.status===stFilter)&&(!cm||r.pref1===cm||(any&&(r.pref2===cm||r.pref3===cm)))&&
+    (!q||[r.full_name,r.email,r.school,r.phone,r.guardian_phone].join(' ').toLocaleLowerCase('tr').includes(q)||digits(r.phone).includes(digits(q))&&digits(q).length>3));
+  const cmp={new:(a,b)=>b.created_at.localeCompare(a.created_at),old:(a,b)=>a.created_at.localeCompare(b.created_at),
+    name:(a,b)=>a.full_name.localeCompare(b.full_name,'tr'),school:(a,b)=>a.school.localeCompare(b.school,'tr')||a.full_name.localeCompare(b.full_name,'tr')}[so];
+  return l.sort(cmp);
 }
-['q','fk','fs','fc'].forEach(id=>$(id).addEventListener('input',render));
-$('ref').onclick=load;
-function open(r){cur=r;$('dn').textContent=r.full_name;$('serr').textContent='';
-  const F=[['Başvuru türü',KIND[r.kind]],['Tarih',new Date(r.created_at).toLocaleString('tr-TR')],['E-posta',r.email],['Telefon',r.phone],['Veli telefonu',r.guardian_phone],['Okul',r.school],['Sınıf',r.grade],
-   ['Pozisyon',r.role],['1. tercih',r.pref1],['2. tercih',r.pref2],['3. tercih',r.pref3],['Deneyim',r.experience],['Ödüller',r.awards],['Motivasyon',r.motivation],
-   ['Yemek',r.diet+(r.diet_note?' — '+r.diet_note:'')],['Alerjiler',(r.allergens||[]).join(', ')||'Yok'],['Sağlık notu',r.medical_note],
-   ['KVKK',r.kvkk?'Onaylı':'Yok'],['Paydaş paylaşımı',r.share_ok?'Evet':'Hayır'],['Foto/video',r.media_ok?'Evet':'Hayır']];
-  const dd=$('dd');dd.innerHTML='';F.filter(([,v])=>v).forEach(([a,b])=>{const t=document.createElement('dt');t.textContent=a;const d=document.createElement('dd');d.textContent=b;dd.append(t,d);});
-  $('dst').value=r.status;$('note').value=r.admin_note||'';$('dlg').showModal();}
-$('close').onclick=()=>$('dlg').close();
-$('save').onclick=async()=>{const upd={status:$('dst').value,admin_note:$('note').value.trim()||null};
-  const {error}=await sb.from('applications').update(upd).eq('id',cur.id);
-  if(error){$('serr').textContent='Kaydedilemedi: '+error.message;return;}
-  Object.assign(cur,upd);$('dlg').close();render();};
-$('csv').onclick=()=>{const cols=['created_at','kind','status','full_name','email','phone','guardian_phone','school','grade','role','pref1','pref2','pref3','experience','awards','motivation','diet','allergens','diet_note','medical_note','share_ok','media_ok','admin_note'];
-  const esc=v=>{v=Array.isArray(v)?v.join(';'):(v??'');v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
-  const csv='﻿'+cols.join(',')+'\n'+filtered().map(r=>cols.map(k=>esc(r[k])).join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='mglmun26-basvurular.csv';a.click();};
+function renderChips(){
+  $('stchips').innerHTML=[['','Tümü',all.length],...STATUS.map(([k,l])=>[k,l,all.filter(r=>r.status===k).length])]
+    .map(([k,l,n])=>`<button type="button" data-st="${k}" aria-pressed="${stFilter===k}">${l}<b>${n}</b></button>`).join('');
+}
+$('stchips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;stFilter=b.dataset.st;render();});
+function health(r){return (r.allergens&&r.allergens.length)||r.medical_note||r.diet!=='No restriction';}
+function render(){
+  renderChips();
+  const list=filtered();
+  $('cnt').textContent=list.length===all.length?all.length+' başvuru':list.length+' / '+all.length+' başvuru';
+  $('items').innerHTML=list.length?list.map(r=>`<li class="item" role="option" data-id="${r.id}" aria-selected="${sel&&sel.id===r.id}">
+    <span class="n">${esc(r.full_name)}</span><span class="d">${fmt(r.created_at,{day:'numeric',month:'short'})}</span>
+    <span class="s">${esc(r.school)} · ${esc(r.grade)}</span><span></span>
+    <span class="p"><span class="st st-${r.status}">${ST[r.status]}</span>${r.kind!=='delegate'?`<span class="tag">${KIND[r.kind]}</span>`:''}${r.pref1?`<span class="tag">1. ${esc(comName(r.pref1))}</span>`:''}${health(r)?'<span class="flag">● Yemek/sağlık</span>':''}</span></li>`).join('')
+    :'<li class="empty">Bu filtrelerle eşleşen başvuru yok.</li>';
+  if(tab==='sum')renderSum();
+  renderDetail();
+}
+['q','fc','so','fany'].forEach(id=>$(id).addEventListener('input',render));
+$('items').addEventListener('click',e=>{const li=e.target.closest('.item');if(li)select(li.dataset.id);});
+function select(id){if(!flushNote())return;sel=all.find(r=>r.id===id)||null;
+  document.querySelectorAll('.item').forEach(li=>li.setAttribute('aria-selected',li.dataset.id===id));
+  const li=document.querySelector(`.item[data-id="${id}"]`);if(li)li.scrollIntoView({block:'nearest'});
+  $('apps').classList.toggle('show',!!sel);renderDetail();$('detail').scrollTop=0;}
+function step(d){const l=filtered();if(!l.length)return;let i=sel?l.findIndex(r=>r.id===sel.id):-1;i=Math.max(0,Math.min(l.length-1,i+d));select(l[i].id);}
+
+/* ── detail ── */
+function renderDetail(){
+  const D=$('detail');
+  if(!sel){D.innerHTML=`<div class="empty" style="padding-top:120px">Soldan bir başvuru seç.<div class="hintkeys" style="margin-top:12px"><kbd>↑</kbd> <kbd>↓</kbd> gezin · <kbd>1</kbd>–<kbd>4</kbd> durum · <kbd>/</kbd> ara</div></div>`;return;}
+  const r=sel,l=filtered(),i=l.findIndex(x=>x.id===r.id);
+  const motLen=(r.motivation||'').length;
+  D.innerHTML=`<div class="dwrap">
+   <div class="dhead"><div><button class="btn back" id="back" style="margin-bottom:12px">← Liste</button><h2>${esc(r.full_name)}</h2>
+     <div class="meta">${KIND[r.kind]} başvurusu · ${fmt(r.created_at,{dateStyle:'long',timeStyle:'short'})}</div></div>
+     <div class="nav2"><button class="btn" id="pdf1" title="Bu başvuruyu PDF olarak indir">PDF</button><button class="btn" id="prev" ${i<=0?'disabled':''} title="Önceki (↑)">↑</button><button class="btn" id="next" ${i<0||i>=l.length-1?'disabled':''} title="Sonraki (↓)">↓</button></div></div>
+   <div class="decide">
+     <div class="seg" role="group" aria-label="Durum">${STATUS.map(([k,lb],n)=>`<button type="button" class="${k}" data-set="${k}" aria-pressed="${r.status===k}">${lb} <kbd>${n+1}</kbd></button>`).join('')}</div>
+     <div class="note"><label for="note">Admin notu <span class="saved" id="nsaved"></span></label><textarea id="note" placeholder="Sadece adminler görür. Örn. ülke önerisi, mülakat notu…">${esc(r.admin_note||'')}</textarea>
+       <div style="display:flex;justify-content:flex-end"><button class="btn" id="nsave">Notu kaydet</button></div></div>
+   </div>
+   <div class="grid">
+     <div class="box"><h3>İletişim</h3><dl class="kv">
+       <dt>E-posta</dt><dd><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></dd>
+       <dt>Telefon</dt><dd><a href="tel:${esc(digits(r.phone))}">${esc(r.phone)}</a> · <a href="https://wa.me/${intlTR(r.phone)}" target="_blank" rel="noopener">WhatsApp</a></dd>
+       <dt>Veli</dt><dd><a href="tel:${esc(digits(r.guardian_phone))}">${esc(r.guardian_phone)}</a></dd>
+       <dt>Okul</dt><dd>${esc(r.school)}</dd><dt>Sınıf</dt><dd>${esc(r.grade)}</dd></dl></div>
+     <div class="box"><h3>${r.role?'Pozisyon':'Komite tercihleri'}</h3>${r.role?`<p class="text" style="font-weight:600">${esc(r.role)}</p>`:''}
+       ${r.pref1?`<ol class="prefs">${[r.pref1,r.pref2,r.pref3].filter(Boolean).map((p,n)=>`<li><i>${n+1}</i>${esc(comName(p))}</li>`).join('')}</ol>`:''}</div>
+     <div class="box full"><h3>Motivasyon mektubu <span>${motLen} karakter</span></h3><p class="text">${esc(r.motivation)}</p></div>
+     <div class="box"><h3>Deneyim</h3><p class="text">${esc(r.experience)}</p></div>
+     <div class="box"><h3>Ödüller</h3><p class="text">${esc(r.awards)}</p></div>
+     <div class="box ${health(r)?'alert':''}"><h3>Yemek &amp; sağlık</h3><dl class="kv">
+       <dt>Yemek</dt><dd>${esc(r.diet==='No restriction'?'Kısıtlama yok':r.diet)}${r.diet_note?' — '+esc(r.diet_note):''}</dd>
+       <dt>Alerjiler</dt><dd>${(r.allergens||[]).length?esc(r.allergens.join(', ')):'Yok'}</dd>
+       <dt>Sağlık notu</dt><dd>${esc(r.medical_note||'—')}</dd></dl></div>
+     <div class="box"><h3>Onaylar</h3><div class="consents">
+       <span class="${r.kvkk?'yes':'no'}">KVKK ${r.kvkk?'✓':'✗'}</span><span class="${r.share_ok?'yes':'no'}">Paydaş paylaşımı ${r.share_ok?'✓':'✗'}</span><span class="${r.media_ok?'yes':'no'}">Foto/video ${r.media_ok?'✓':'✗'}</span></div></div>
+   </div>
+   <div class="hintkeys"><kbd>↑</kbd> <kbd>↓</kbd> önceki/sonraki · <kbd>1</kbd> Bekliyor · <kbd>2</kbd> İncelendi · <kbd>3</kbd> Kabul · <kbd>4</kbd> Red · <kbd>Esc</kbd> liste</div>
+  </div>`;
+  $('pdf1').onclick=()=>printApps([sel],sel.full_name);$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
+  $('back').onclick=()=>{if(flushNote()){sel=null;$('apps').classList.remove('show');render();}};
+  D.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>setStatus(b.dataset.set));
+  $('nsave').onclick=()=>saveNote();
+  $('note').addEventListener('input',()=>{$('nsaved').textContent='· kaydedilmedi';});
+}
+async function update(r,upd){
+  const {data,error}=await sb.from('applications').update(upd).eq('id',r.id).select('id');
+  if(error){toast('Kaydedilemedi: '+error.message);return false;}
+  if(!data||!data.length){toast('Kaydedilemedi: yetkin yok gibi görünüyor.');return false;}
+  Object.assign(r,upd);return true;
+}
+async function setStatus(s){if(!sel||sel.status===s)return;const r=sel;
+  const note=$('note')?$('note').value.trim()||null:r.admin_note;
+  if(await update(r,{status:s,admin_note:note})){toast(r.full_name.split(' ')[0]+' → '+ST[s]);render();}}
+async function saveNote(){if(!sel)return true;const v=$('note').value.trim()||null;if(v===(sel.admin_note||null)){$('nsaved').textContent='';return true;}
+  const ok=await update(sel,{admin_note:v});if(ok)$('nsaved').textContent='· kaydedildi';return ok;}
+function flushNote(){const n=$('note');if(!sel||!n)return true;const v=n.value.trim()||null;
+  if(v!==(sel.admin_note||null)){if(confirm('Admin notu kaydedilmedi. Kaydedilsin mi?')){saveNote();}}return true;}
+
+/* ── keyboard ── */
+document.addEventListener('keydown',e=>{
+  if($('shell').hidden||tab!=='apps')return;
+  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if(e.key==='/'&&!typing){e.preventDefault();$('q').focus();return;}
+  if(e.key==='Escape'){if(typing)document.activeElement.blur();else if(sel){$('back')&&$('back').click();}return;}
+  if(typing)return;
+  if(e.key==='ArrowDown'||e.key==='j'){e.preventDefault();step(1);}
+  else if(e.key==='ArrowUp'||e.key==='k'){e.preventDefault();step(-1);}
+  else if(/^[1-4]$/.test(e.key)&&sel){setStatus(STATUS[+e.key-1][0]);}
+});
+
+/* ── tabs ── */
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;
+  document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x===b));
+  $('apps').hidden=tab!=='apps';$('sum').hidden=tab!=='sum';if(tab==='sum')renderSum();});
+
+/* ── summary ── */
+function bars(rows){const max=Math.max(1,...rows.map(r=>r[1]));return `<div class="bars">${rows.map(([l,n])=>`<div class="bar"><span>${esc(l)}</span><span class="t"><i style="width:${n/max*100}%"></i></span><b>${n}</b></div>`).join('')}</div>`;}
+function renderSum(){
+  const del=all.filter(r=>r.kind==='delegate'),acc=all.filter(r=>r.status==='accepted');
+  const by=(arr,f)=>arr.reduce((m,r)=>{const k=f(r);m[k]=(m[k]||0)+1;return m},{});
+  const pref1=COMS.map(c=>[comName(c),del.filter(r=>r.pref1===c).length]);
+  const anyPref=COMS.slice(0,3).map(c=>[c,del.filter(r=>[r.pref1,r.pref2,r.pref3].includes(c)).length]);
+  const grades=['Prep (Hazırlık)','9','10','11','12','University'].map(g=>[g==='University'?'Üniversite':g==='Prep (Hazırlık)'?'Hazırlık':g+'. sınıf',all.filter(r=>r.grade===g).length]);
+  const schools=Object.entries(by(all,r=>r.school.trim())).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const days=Object.entries(by(all,r=>r.created_at.slice(0,10))).sort().slice(-14).map(([d,n])=>[new Date(d).toLocaleDateString('tr-TR',{day:'numeric',month:'short'}),n]);
+  const pool=acc.length?acc:all, poolName=acc.length?'kabul edilenler':'tüm başvurular';
+  const diets=Object.entries(by(pool,r=>r.diet)).map(([d,n])=>[d==='No restriction'?'Kısıtlama yok':d,n]);
+  const allergens=Object.entries(pool.flatMap(r=>r.allergens||[]).reduce((m,a)=>(m[a]=(m[a]||0)+1,m),{}));
+  const special=pool.filter(health);
+  const noMedia=pool.filter(r=>!r.media_ok);
+  $('swrap').innerHTML=`<h2>Özet</h2><p class="lead">${all.length} başvuru · son güncelleme ${fmt(Date.now(),{hour:'2-digit',minute:'2-digit'})}</p>
+   <div class="kpis">${[['Toplam',all.length],...STATUS.map(([k,l])=>[l,all.filter(r=>r.status===k).length])].map(([l,n])=>`<div class="kpi"><b>${n}</b><small>${l}</small></div>`).join('')}</div>
+   <div class="cols">
+    <div class="box"><h3>1. tercihe göre komiteler</h3>${bars(pref1)}</div>
+    <div class="box"><h3>Herhangi bir tercihte</h3>${bars(anyPref)}</div>
+    <div class="box"><h3>Sınıflar</h3>${bars(grades)}</div>
+    <div class="box"><h3>Günlük başvuru <span>son 14 gün</span></h3>${days.length?bars(days):'<p class="empty">—</p>'}</div>
+    <div class="box full"><h3>Okullar <span>ilk 10</span></h3>${schools.length?bars(schools):'<p class="empty">—</p>'}</div>
+    <div class="box"><h3>Yemek <span>${poolName}</span></h3>${bars(diets.length?diets:[['—',0]])}${allergens.length?`<h3 style="margin-top:18px">Alerjiler</h3>${bars(allergens)}`:''}</div>
+    <div class="box"><h3>Foto/video izni yok <span>${noMedia.length} kişi · ${poolName}</span></h3>${noMedia.length?`<table class="mini"><tbody>${noMedia.map(r=>`<tr><td>${esc(r.full_name)}</td><td>${esc(r.school)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty" style="padding:12px">Herkes izin vermiş.</p>'}</div>
+    <div class="box full"><h3>Yemek / sağlık notu olanlar <span>${special.length} kişi · ${poolName}</span></h3>${special.length?`<table class="mini"><thead><tr><th>Ad</th><th>Yemek</th><th>Alerji</th><th>Sağlık notu</th></tr></thead><tbody>${special.map(r=>`<tr><td>${esc(r.full_name)}</td><td>${esc(r.diet==='No restriction'?'—':r.diet)}${r.diet_note?' — '+esc(r.diet_note):''}</td><td>${esc((r.allergens||[]).join(', ')||'—')}</td><td>${esc(r.medical_note||'—')}</td></tr>`).join('')}</tbody></table>`:'<p class="empty" style="padding:12px">Yok.</p>'}</div>
+   </div>
+   <p style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="mails">Kabul edilenlerin e-postalarını kopyala (${acc.length})</button></p>`;
+  $('mails').onclick=async()=>{const t=acc.map(r=>r.email).join(', ');if(!t){toast('Henüz kabul edilen yok.');return;}try{await navigator.clipboard.writeText(t);toast(acc.length+' e-posta kopyalandı');}catch(e){prompt('Kopyala:',t);}};
+}
+
+/* ── exports ── */
+const COLS=[['created_at','Tarih'],['kind','Tür'],['status','Durum'],['full_name','Ad Soyad'],['email','E-posta'],['phone','Telefon'],['guardian_phone','Veli telefonu'],['school','Okul'],['grade','Sınıf'],['role','Pozisyon'],['pref1','1. tercih'],['pref2','2. tercih'],['pref3','3. tercih'],['experience','Deneyim'],['awards','Ödüller'],['motivation','Motivasyon'],['diet','Yemek'],['allergens','Alerjiler'],['diet_note','Yemek notu'],['medical_note','Sağlık notu'],['kvkk','KVKK'],['share_ok','Paydaş paylaşımı'],['media_ok','Foto/video'],['admin_note','Admin notu']];
+const val=(r,k)=>{const v=r[k];if(k==='status')return ST[v];if(k==='kind')return KIND[v];if(k==='created_at')return fmt(v,{dateStyle:'short',timeStyle:'short'});
+  if(k==='diet')return v==='No restriction'?'Kısıtlama yok':v;if(/^pref/.test(k))return v?comName(v):'';if(typeof v==='boolean')return v?'Evet':'Hayır';if(Array.isArray(v))return v.join(', ');return v??'';};
+const fname=ext=>'mglmun26-basvurular-'+new Date().toISOString().slice(0,10)+'.'+ext;
+function exportList(){const l=filtered();if(!l.length){toast('İndirilecek başvuru yok.');return null;}return l;}
+$('dlb').onclick=e=>{e.stopPropagation();const m=$('dlm');m.hidden=!m.hidden;$('dlb').setAttribute('aria-expanded',!m.hidden);};
+document.addEventListener('click',e=>{if(!e.target.closest('.dl'))$('dlm').hidden=true;});
+$('dlm').addEventListener('click',()=>$('dlm').hidden=true);
+$('csv').onclick=()=>{const l=exportList();if(!l)return;
+  const cell=v=>{v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+  const csv='\ufeff'+COLS.map(c=>c[1]).join(',')+'\n'+l.map(r=>COLS.map(([k])=>cell(val(r,k))).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=fname('csv');a.click();};
+$('xlsx').onclick=()=>{const l=exportList();if(!l)return;if(!window.XLSX){toast('Excel kütüphanesi yüklenemedi, CSV kullan.');return;}
+  const safe=v=>typeof v==='string'&&/^[=+\-@]/.test(v)?"'"+v:v;
+  const sheet=XLSX.utils.aoa_to_sheet([COLS.map(c=>c[1]),...l.map(r=>COLS.map(([k])=>safe(val(r,k))))]);
+  sheet['!cols']=COLS.map(([k])=>({wch:['motivation','experience'].includes(k)?60:['full_name','email','school','admin_note','medical_note'].includes(k)?28:14}));
+  sheet['!autofilter']={ref:sheet['!ref']};sheet['!freeze']={xSplit:0,ySplit:1};
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,sheet,'Başvurular');
+  // catering sheet for lunch planning
+  const cat=l.filter(health).map(r=>[r.full_name,r.school,val(r,'diet'),r.diet_note||'',(r.allergens||[]).join(', '),r.medical_note||'',ST[r.status]]);
+  if(cat.length){const s2=XLSX.utils.aoa_to_sheet([['Ad Soyad','Okul','Yemek','Yemek notu','Alerjiler','Sağlık notu','Durum'],...cat]);s2['!cols']=[{wch:26},{wch:28},{wch:16},{wch:24},{wch:24},{wch:30},{wch:12}];XLSX.utils.book_append_sheet(wb,s2,'Yemek & sağlık');}
+  XLSX.writeFile(wb,fname('xlsx'));toast(l.length+' başvuru Excel olarak indirildi');};
+function printApps(l,title){
+  const P=$('print'),row=(a,b)=>b?`<tr><th>${a}</th><td>${esc(b)}</td></tr>`:'';
+  P.innerHTML=l.map(r=>`<section class="app"><h2>${esc(r.full_name)}</h2><table>
+    ${row('Başvuru',KIND[r.kind]+' · '+fmt(r.created_at,{dateStyle:'long',timeStyle:'short'}))}${row('Durum',ST[r.status])}${row('E-posta',r.email)}${row('Telefon',r.phone)}${row('Veli telefonu',r.guardian_phone)}${row('Okul',r.school+' · '+r.grade)}${row('Pozisyon',r.role)}
+    ${row('Tercihler',[r.pref1,r.pref2,r.pref3].filter(Boolean).map((p,i)=>(i+1)+'. '+comName(p)).join('   '))}${row('Yemek',val(r,'diet')+(r.diet_note?' — '+r.diet_note:''))}${row('Alerjiler',(r.allergens||[]).join(', ')||'Yok')}${row('Sağlık notu',r.medical_note)}
+    ${row('Onaylar','KVKK '+(r.kvkk?'✓':'✗')+' · Paydaş '+(r.share_ok?'✓':'✗')+' · Foto/video '+(r.media_ok?'✓':'✗'))}${row('Admin notu',r.admin_note)}</table>
+    <h3>Deneyim</h3><p class="tx">${esc(r.experience)}</p><h3>Ödüller</h3><p class="tx">${esc(r.awards)}</p><h3>Motivasyon mektubu</h3><p class="tx">${esc(r.motivation)}</p></section>`).join('');
+  doPrint(title);}
+function doPrint(title){const t=document.title;document.title=title.replace(/[\\/:*?"<>|]/g,'')+' · MGLMUN26';setTimeout(()=>{window.print();document.title=t;},50);}
+$('pdf').onclick=()=>{const l=exportList();if(l)printApps(l,'Başvurular '+new Date().toISOString().slice(0,10));};
+$('pdfl').onclick=()=>{const l=exportList();if(!l)return;
+  $('print').innerHTML=`<h1>MGLMUN’26 · Başvuru listesi</h1><div class="pm">${l.length} başvuru · ${fmt(Date.now(),{dateStyle:'long',timeStyle:'short'})}</div>
+  <table><thead><tr><th>#</th><th>Ad Soyad</th><th>Okul / Sınıf</th><th>Telefon</th><th>Tercihler</th><th>Durum</th></tr></thead><tbody>${l.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.full_name)}<br><small>${esc(r.email)}</small></td><td>${esc(r.school)} · ${esc(r.grade)}</td><td>${esc(r.phone)}</td><td>${esc(r.role||[r.pref1,r.pref2,r.pref3].filter(Boolean).map(comName).join(' › '))}</td><td>${ST[r.status]}</td></tr>`).join('')}</tbody></table>`;
+  doPrint('Başvuru listesi '+new Date().toISOString().slice(0,10));};
 boot();
 </script>
 </body>
