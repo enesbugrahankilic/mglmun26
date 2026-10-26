@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>MGLMUN'26 · Admin</title>
+<link rel="icon" href="logo.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#f7f1e8;--paper:#fffdf9;--ink:#2a1a17;--soft:#6e5a52;--line:#e2d4c2;--wine:#6b1520;--gold:#b98f45;
+ --display:"Cormorant Garamond",Georgia,serif;--body:"Instrument Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
+header{background:#24090c;color:#f3e7d6}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(16px,env(safe-area-inset-left))}
+.brand{display:flex;gap:10px;align-items:center;font:700 20px/1 var(--display)}.brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1.5px #e2c48c}
+.w{max-width:1280px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+button,select,input{font:inherit}
+.btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn.wine{background:var(--wine);border-color:var(--wine);color:#fff}
+header .btn{background:transparent;color:#f3e7d6;border-color:rgba(243,231,214,.4)}
+.login{max-width:380px;margin:80px auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;gap:14px}
+.login h1{font:700 32px/1 var(--display);margin:0}
+.login label{display:grid;gap:6px;font-weight:600;font-size:14px}
+.login input{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
+.err{color:#b3261e;font-size:14px;min-height:1em;margin:0}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font:700 34px/1 var(--display);font-variant-numeric:tabular-nums}.stat small{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.bar input,.bar select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--paper)}
+.bar input{flex:1;min-width:200px}
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.r{cursor:pointer}tr.r:hover td{background:#fbf6ee}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px}
+.s-pending{background:#f3ead9;color:#7a5a1e}.s-reviewed{background:#e5ecf6;color:#25456e}.s-accepted{background:#e3f1e4;color:#1f5a2a}.s-rejected{background:#f6e3e3;color:#8a1f1f}
+.k{font-size:12px;color:var(--soft)}
+dialog{border:0;border-radius:14px;padding:0;max-width:760px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(20,6,8,.55)}
+.dlg{padding:24px;display:grid;gap:14px}
+.dlg h2{font:700 30px/1.1 var(--display);margin:0}
+.grid{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;font-size:14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.grid dt{color:var(--soft)}.grid dd{margin:0;white-space:pre-wrap;word-break:break-word}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:14px}
+textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;min-height:70px;font:inherit}
+.empty{padding:40px;text-align:center;color:var(--soft)}
+</style>
+</head>
+<body>
+<header><div class="w"><div class="brand"><img src="logo.jpg" alt="">MGLMUN’26 · Admin</div><button class="btn" id="out" hidden>Çıkış yap</button></div></header>
+
+<form class="login" id="login" hidden>
+  <h1>Admin girişi</h1>
+  <label>E-posta<input type="email" id="em" autocomplete="username" required></label>
+  <label>Şifre<input type="password" id="pw" autocomplete="current-password" required></label>
+  <button class="btn wine" type="submit">Giriş yap</button>
+  <p class="err" id="lerr"></p>
+</form>
+
+<main class="w" id="app" hidden>
+  <div class="stats" id="stats"></div>
+  <div class="bar">
+    <input type="search" id="q" placeholder="İsim, e-posta veya okul ara">
+    <select id="fk"><option value="">Tüm başvurular</option><option value="delegate">Delege</option><option value="board">Divan</option><option value="org">Organizasyon</option></select>
+    <select id="fs"><option value="">Tüm durumlar</option><option value="pending">Bekliyor</option><option value="reviewed">İncelendi</option><option value="accepted">Kabul</option><option value="rejected">Red</option></select>
+    <select id="fc"><option value="">Tüm komiteler (1. tercih)</option><option>WTO</option><option>UN Women</option><option>Petrograd Soviet</option><option>Any</option></select>
+    <button class="btn" id="csv">CSV indir</button>
+    <button class="btn" id="ref">Yenile</button>
+  </div>
+  <div class="tbl"><table><thead><tr><th>Tarih</th><th>Ad Soyad</th><th>Tür</th><th>Okul / Sınıf</th><th>Tercihler / Pozisyon</th><th>Durum</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <p class="k" style="margin:12px 0 40px" id="foot"></p>
+</main>
+
+<dialog id="dlg"><div class="dlg">
+  <h2 id="dn"></h2>
+  <dl class="grid" id="dd"></dl>
+  <label class="k">Admin notu<textarea id="note"></textarea></label>
+  <div class="acts">
+    <select id="dst"><option value="pending">Bekliyor</option><option value="reviewed">İncelendi</option><option value="accepted">Kabul</option><option value="rejected">Red</option></select>
+    <button class="btn wine" id="save">Kaydet</button>
+    <button class="btn" id="close">Kapat</button>
+    <span class="err" id="serr"></span>
+  </div>
+</div></dialog>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const KIND={delegate:'Delege',board:'Divan',org:'Organizasyon'};
+const ST={pending:'Bekliyor',reviewed:'İncelendi',accepted:'Kabul',rejected:'Red'};
+const c=window.MGLMUN_CONFIG;
+const sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_ANON_KEY);
+let all=[],cur=null;
+
+async function boot(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){$('login').hidden=true;$('app').hidden=false;$('out').hidden=false;load();}
+  else{$('login').hidden=false;$('app').hidden=true;$('out').hidden=true;}
+}
+$('login').addEventListener('submit',async e=>{e.preventDefault();$('lerr').textContent='';
+  const {error}=await sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value});
+  if(error){$('lerr').textContent='E-posta veya şifre hatalı.';return;} boot();});
+$('out').onclick=async()=>{await sb.auth.signOut();boot();};
+
+async function load(){
+  $('foot').textContent='Yükleniyor…';
+  const {data,error}=await sb.from('applications').select('*').order('created_at',{ascending:false});
+  if(error){$('foot').textContent='Başvurular okunamadı: '+error.message;return;}
+  all=data||[];
+  if(!all.length)$('foot').textContent='Henüz başvuru yok. (Başvuru olduğu halde boş görünüyorsa e-postan admins tablosunda değildir.)';
+  render();
+}
+function filtered(){const q=$('q').value.toLowerCase().trim(),k=$('fk').value,s=$('fs').value,cm=$('fc').value;
+  return all.filter(r=>(!k||r.kind===k)&&(!s||r.status===s)&&(!cm||r.pref1===cm)&&(!q||[r.full_name,r.email,r.school].join(' ').toLowerCase().includes(q)));}
+function render(){
+  const st=$('stats');st.innerHTML='';
+  [['Toplam',all.length],['Delege',all.filter(r=>r.kind==='delegate').length],['Divan',all.filter(r=>r.kind==='board').length],['Organizasyon',all.filter(r=>r.kind==='org').length],['Bekleyen',all.filter(r=>r.status==='pending').length]]
+   .forEach(([a,b])=>{const d=document.createElement('div');d.className='stat';d.innerHTML='<b></b><small></small>';d.querySelector('b').textContent=b;d.querySelector('small').textContent=a;st.append(d);});
+  const rows=$('rows');rows.innerHTML='';const list=filtered();
+  if(!list.length){rows.innerHTML='<tr><td colspan="6" class="empty">Gösterilecek başvuru yok.</td></tr>';}
+  list.forEach(r=>{const tr=document.createElement('tr');tr.className='r';tr.tabIndex=0;
+    const cells=[new Date(r.created_at).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'}),r.full_name+'\n'+r.email,KIND[r.kind],r.school+' · '+r.grade,r.role||[r.pref1,r.pref2,r.pref3].filter(Boolean).join(' › ')];
+    cells.forEach((t,i)=>{const td=document.createElement('td');td.textContent=t;td.style.whiteSpace=i===1?'pre-line':'';tr.append(td);});
+    const td=document.createElement('td');const p=document.createElement('span');p.className='pill s-'+r.status;p.textContent=ST[r.status];td.append(p);tr.append(td);
+    tr.onclick=()=>open(r);tr.onkeydown=e=>{if(e.key==='Enter')open(r)};rows.append(tr);});
+  if(all.length)$('foot').textContent=list.length+' / '+all.length+' başvuru gösteriliyor';
+}
+['q','fk','fs','fc'].forEach(id=>$(id).addEventListener('input',render));
+$('ref').onclick=load;
+function open(r){cur=r;$('dn').textContent=r.full_name;$('serr').textContent='';
+  const F=[['Başvuru türü',KIND[r.kind]],['Tarih',new Date(r.created_at).toLocaleString('tr-TR')],['E-posta',r.email],['Telefon',r.phone],['Veli telefonu',r.guardian_phone],['Okul',r.school],['Sınıf',r.grade],
+   ['Pozisyon',r.role],['1. tercih',r.pref1],['2. tercih',r.pref2],['3. tercih',r.pref3],['Deneyim',r.experience],['Ödüller',r.awards],['Motivasyon',r.motivation],
+   ['Yemek',r.diet+(r.diet_note?' — '+r.diet_note:'')],['Alerjiler',(r.allergens||[]).join(', ')||'Yok'],['Sağlık notu',r.medical_note],
+   ['KVKK',r.kvkk?'Onaylı':'Yok'],['Paydaş paylaşımı',r.share_ok?'Evet':'Hayır'],['Foto/video',r.media_ok?'Evet':'Hayır']];
+  const dd=$('dd');dd.innerHTML='';F.filter(([,v])=>v).forEach(([a,b])=>{const t=document.createElement('dt');t.textContent=a;const d=document.createElement('dd');d.textContent=b;dd.append(t,d);});
+  $('dst').value=r.status;$('note').value=r.admin_note||'';$('dlg').showModal();}
+$('close').onclick=()=>$('dlg').close();
+$('save').onclick=async()=>{const upd={status:$('dst').value,admin_note:$('note').value.trim()||null};
+  const {error}=await sb.from('applications').update(upd).eq('id',cur.id);
+  if(error){$('serr').textContent='Kaydedilemedi: '+error.message;return;}
+  Object.assign(cur,upd);$('dlg').close();render();};
+$('csv').onclick=()=>{const cols=['created_at','kind','status','full_name','email','phone','guardian_phone','school','grade','role','pref1','pref2','pref3','experience','awards','motivation','diet','allergens','diet_note','medical_note','share_ok','media_ok','admin_note'];
+  const esc=v=>{v=Array.isArray(v)?v.join(';'):(v??'');v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+  const csv='﻿'+cols.join(',')+'\n'+filtered().map(r=>cols.map(k=>esc(r[k])).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='mglmun26-basvurular.csv';a.click();};
+boot();
+</script>
+</body>
+</html>
