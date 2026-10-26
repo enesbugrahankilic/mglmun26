@@ -180,6 +180,8 @@ footer .hash{color:var(--gold-soft);font-weight:600}
 .type p{margin:0;color:var(--ink-soft);font-size:15px}
 .status{align-self:flex-start;font:600 11px/1 var(--body);letter-spacing:.14em;padding:6px 10px;border-radius:99px;background:#e3f1e4;color:#1f5a2a}
 .type .go{margin-top:auto;font-weight:600;color:var(--wine)}
+.type.closed{opacity:.6;cursor:default}.type.closed:hover{transform:none;box-shadow:none}
+.type.closed .badge{background:var(--ink-soft)}.status.off{background:#f1e3e3;color:#7a1f1f}.type.closed .go{color:var(--ink-soft)}
 /* form */
 .formgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:36px;align-items:start}
 @media (max-width:960px){.formgrid{grid-template-columns:1fr}}
@@ -286,7 +288,7 @@ button.submit:hover{background:#561019}
   <div><h3>English in action</h3><p>The working language is English, so you speak, listen and draft in it all weekend.</p></div>
   <div><h3>A portfolio to show</h3><p>Your position paper, committee outcome and certificate are concrete evidence of your work.</p></div>
   <div><h3>New networks</h3><p>Work alongside delegates and chairs from other schools and build lasting connections.</p></div></div></div></section>
-<section class="cta"><div class="wrap"><div class="eyebrow" style="color:var(--gold-soft)">Applications</div><h2>Ready to take the floor?</h2><p>Delegate, board and organisation team applications are open.</p><div class="btns"><a class="btn primary" href="#apply">Choose an application</a></div></div></section>
+<section class="cta"><div class="wrap"><div class="eyebrow" style="color:var(--gold-soft)">Applications</div><h2>Ready to take the floor?</h2><p>Delegate applications are open. Board and organisation team positions are filled.</p><div class="btns"><a class="btn primary" href="#apply">Choose an application</a></div></div></section>
 </div>
 
 <div class="view" data-view="committees" hidden>
@@ -325,8 +327,8 @@ button.submit:hover{background:#561019}
 <header class="page-hero"><div class="wrap"><div class="kick">MGLMUN’26 · 4–5–6 December 2026</div><h1>Applications</h1><p>Choose the role you want to apply for. Each form takes about ten minutes.</p></div></header>
 <section><div class="wrap"><div class="types">
   <a class="type" href="#apply-delegate"><div class="badge">D</div><span class="status">OPEN</span><h3>Delegate</h3><p>Represent a country or role in one of the three committees. Allocations are made by the academic team based on your preferences.</p><span class="go">Start application →</span></a>
-  <a class="type" href="#apply-board"><div class="badge">B</div><span class="status">OPEN</span><h3>Committee Board</h3><p>Chair a committee as President Chair or Vice Chair, or join the crisis team. Previous MUN experience is expected.</p><span class="go">Start application →</span></a>
-  <a class="type" href="#apply-org"><div class="badge">O</div><span class="status">OPEN</span><h3>Organisation Team</h3><p>Help run the conference in PR &amp; media, logistics, registration or design.</p><span class="go">Start application →</span></a>
+  <div class="type closed" aria-disabled="true"><div class="badge">B</div><span class="status off">CLOSED</span><h3>Committee Board</h3><p>All board and crisis team positions have been filled. Thank you for your interest.</p><span class="go">Applications closed</span></div>
+  <div class="type closed" aria-disabled="true"><div class="badge">O</div><span class="status off">CLOSED</span><h3>Organisation Team</h3><p>The organisation team is complete. Thank you for your interest.</p><span class="go">Applications closed</span></div>
 </div></div></section></div>
 <div class="view" data-view="apply-delegate" hidden>
 <header class="page-hero"><div class="wrap"><a class="back" href="#apply">← Application types</a><div class="kick" style="margin-top:18px">MGLMUN’26 · 4–5–6 December 2026</div><h1>Delegate Application</h1><p>Apply to represent a delegation at MGLMUN’26. Countries and roles are allocated by the academic team.</p></div></header>
@@ -435,6 +437,8 @@ button.submit:hover{background:#561019}
 </main>
 <footer><div class="wrap"><div><b>MGLMUN’26</b><div style="margin-top:8px">4–5–6 December 2026</div></div><div class="hash">#FuelUpDreams</div></div></footer>
 <script src="config.js"></script>
+<script>/* Board and organisation team applications are closed: replace their forms. */
+['board','org'].forEach(k=>{const s=document.getElementById('slot-'+k);if(s)s.innerHTML='<div class="done"><h2>Applications closed</h2><p>All positions have been filled. Delegate applications are still open.</p><p><a class="btn primary" href="#apply-delegate">Apply as a delegate</a></p></div>';});</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>try{const c=window.MGLMUN_CONFIG;if(c&&!/PROJE-KODUN/.test(c.SUPABASE_URL))window.sb=supabase.createClient(c.SUPABASE_URL,c.SUPABASE_ANON_KEY,{auth:{persistSession:false}});}catch(e){console.error(e)}</script>
 <script>
