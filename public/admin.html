@@ -6,29 +6,29 @@
 <meta name="robots" content="noindex">
 <title>MGLMUN'26 · Admin</title>
 <link rel="icon" href="logo.jpg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#f7f1e8;--paper:#fffdf9;--ink:#2a1a17;--soft:#6e5a52;--line:#e2d4c2;--wine:#6b1520;--gold:#b98f45;
- --display:"Cormorant Garamond",Georgia,serif;--body:"Instrument Sans",system-ui,sans-serif}
+:root{--bg:#f7f3ee;--paper:#fffdfa;--ink:#1d1213;--soft:#7c6e6b;--line:#e3d9cd;--wine:#500809;--gold:#cfc9c6;
+ --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
-header{background:#24090c;color:#f3e7d6}
+header{background:#500809;color:#f3e7d6}
 header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(16px,env(safe-area-inset-left))}
-.brand{display:flex;gap:10px;align-items:center;font:700 20px/1 var(--display)}.brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1.5px #e2c48c}
+.brand{display:flex;gap:10px;align-items:center;font:600 20px/1 var(--display)}.brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1.5px #cfc9c6}
 .w{max-width:1280px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
 button,select,input{font:inherit}
 .btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
 .btn.wine{background:var(--wine);border-color:var(--wine);color:#fff}
 header .btn{background:transparent;color:#f3e7d6;border-color:rgba(243,231,214,.4)}
 .login{max-width:380px;margin:80px auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;gap:14px}
-.login h1{font:700 32px/1 var(--display);margin:0}
+.login h1{font:600 32px/1 var(--display);margin:0}
 .login label{display:grid;gap:6px;font-weight:600;font-size:14px}
 .login input{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
 .err{color:#b3261e;font-size:14px;min-height:1em;margin:0}
 .stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0}
 @media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.stat b{display:block;font:700 34px/1 var(--display);font-variant-numeric:tabular-nums}.stat small{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.stat b{display:block;font:600 34px/1 var(--display);font-variant-numeric:tabular-nums}.stat small{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
 .bar input,.bar select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--paper)}
 .bar input{flex:1;min-width:200px}
@@ -43,7 +43,7 @@ tr.r{cursor:pointer}tr.r:hover td{background:#fbf6ee}
 dialog{border:0;border-radius:14px;padding:0;max-width:760px;width:calc(100% - 32px)}
 dialog::backdrop{background:rgba(20,6,8,.55)}
 .dlg{padding:24px;display:grid;gap:14px}
-.dlg h2{font:700 30px/1.1 var(--display);margin:0}
+.dlg h2{font:600 30px/1.1 var(--display);margin:0}
 .grid{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;font-size:14px}
 @media(max-width:600px){.grid{grid-template-columns:1fr}}
 .grid dt{color:var(--soft)}.grid dd{margin:0;white-space:pre-wrap;word-break:break-word}
