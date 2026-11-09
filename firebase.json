@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "site": "mglmun26",
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "img/BENIOKU.md"],
+    "cleanUrls": false
+  }
+}
