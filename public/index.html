@@ -178,7 +178,34 @@ section{padding-block:clamp(72px,9vw,112px)}
 .com{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .25s,box-shadow .25s,border-color .25s;min-width:0}
 .com:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-2)}
 .art{position:relative;aspect-ratio:16/9;color:#fff;padding:20px 22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;isolation:isolate}
-.art svg.pat{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.art svg.pat{position:absolute;inset:0;width:100%;height:100%;z-index:-3}
+.art .pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.art::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.82) 100%)}
+.com:hover .art .pic{transform:scale(1.06)}
+.com .art{aspect-ratio:16/11}
+/* committee cover */
+.ph.cover{position:relative;overflow:hidden;isolation:isolate;min-height:clamp(380px,40vw,520px);display:flex;align-items:flex-end;padding-bottom:56px}
+.ph.cover>.wrap{width:100%;padding-bottom:0}
+.ph.cover .pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 78%;z-index:-2}
+.ph.cover::after{content:"";position:absolute;inset:0;z-index:-1;opacity:1;-webkit-mask-image:none;mask-image:none;background-size:auto;background:linear-gradient(90deg,var(--bg-c) 0%,color-mix(in srgb,var(--bg-c) 80%,transparent) 38%,transparent 75%),linear-gradient(0deg,var(--bg-c) 0%,transparent 45%)}
+.ph.cover.wto{--bg-c:var(--wto)}.ph.cover.unw{--bg-c:var(--unw)}.ph.cover.ps{--bg-c:var(--ps)}
+@media (max-width:700px){.ph.cover::after{background:linear-gradient(0deg,var(--bg-c) 15%,color-mix(in srgb,var(--bg-c) 55%,transparent) 70%,transparent)}}
+/* scene band */
+.scene{position:relative;overflow:hidden;isolation:isolate;color:var(--on-dark);min-height:clamp(420px,48vw,620px);display:flex;align-items:flex-end;padding:0 0 64px}
+.scene>.wrap{width:100%}
+.scene>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.scene::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(20,3,5,.92) 0%,rgba(20,3,5,.35) 45%,rgba(20,3,5,0) 70%)}
+.scene blockquote{margin:0;max-width:30ch;font:400 clamp(28px,3.6vw,46px)/1.12 var(--serif);letter-spacing:-.01em;text-wrap:balance}
+.scene blockquote em{color:#e6cf9f}
+.scene .who{margin-top:16px;font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-2)}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:#140304}
+.strip a{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;isolation:isolate;color:#fff;text-decoration:none}
+.strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s}
+.strip a::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
+.strip a:hover img{transform:scale(1.05)}
+.strip span{position:absolute;left:22px;bottom:20px;right:22px;font:500 clamp(22px,2.4vw,32px)/1.05 var(--serif)}
+.strip small{display:block;font:600 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-bottom:8px}
+@media (max-width:700px){.strip{grid-template-columns:1fr}.strip a{aspect-ratio:16/9}}
 .art .tag{align-self:flex-start;font:600 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.32);background:rgba(0,0,0,.18)}
 .art .nm{font:500 46px/.95 var(--serif);letter-spacing:-.02em}
 .art .fn{font:italic 400 15px/1.3 var(--serif);opacity:.85;margin-top:6px}
@@ -261,6 +288,7 @@ footer a{color:var(--on-dark);text-decoration:none}
 footer a:hover{text-decoration:underline;text-underline-offset:3px}
 footer .brand{margin-bottom:14px}
 footer .bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:20px 26px;border-top:1px solid rgba(207,201,198,.14);font-size:13px}
+footer .credits{margin:0 0 14px;font-size:12px;color:var(--on-dark-2)}footer .credits a{color:inherit}
 footer .hash{color:var(--silver);font-weight:600;letter-spacing:.02em}
 
 /* ───────── Page header (inner views) ───────── */
@@ -432,6 +460,11 @@ legend + *{clear:both}
     </div>
   </div></div>
 
+  <section class="scene" aria-label="The conference floor"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/UN%20General%20Assembly%20hall.jpg?width=1800" onerror="this.onerror=null;this.src='img/hall.svg'" alt="The United Nations General Assembly hall in New York" loading="lazy"><div class="wrap">
+    <blockquote>Three days. Three rooms. <em>One vote</em> at the end of each.</blockquote>
+    <div class="who">MGLMUN’26 · Muğla · 4–6 December</div>
+  </div></section>
+
   <section><div class="wrap about">
     <div>
       <div class="label">Who we are</div>
@@ -495,10 +528,9 @@ legend + *{clear:both}
   <section><div class="wrap">
     <div class="label">Secretariat</div><h2>Secretariat</h2>
     <div class="people" data-secretariat style="max-width:780px"></div>
-    <div class="sub-h"><div class="label">Committee boards</div><h2>Chairs</h2></div>
+    <div class="sub-h"><div class="label">Committee boards</div><h2>Chair Board</h2></div>
     <div class="boards" data-boards></div>
     <div class="sub-h"><div class="label">Organisation team</div><h2>Organisation team</h2></div>
-    <div class="people" data-orgleads style="max-width:780px"></div>
     <div class="depts" data-depts></div>
   </div></section>
 </div>
@@ -628,7 +660,7 @@ legend + *{clear:both}
     <div><h4>Conference</h4><ul><li><a href="#committees">Committees</a></li><li><a href="#programme">Programme</a></li><li><a href="#team">Team</a></li><li><a href="#faq">FAQ</a></li></ul></div>
     <div><h4>Committees</h4><ul><li><a href="#committee-wto">WTO</a></li><li><a href="#committee-unw">UN Women</a></li><li><a href="#committee-ps">Petrograd Soviet</a></li><li><a href="#apply-delegate">Apply as a delegate</a></li></ul></div>
   </div>
-  <div class="bottom"><span>© 2026 MGLMUN’26</span><span class="hash">#FuelUpDreams</span></div>
+  <p class="credits">Photos via Wikimedia Commons, used under their stated licences: <a href="https://commons.wikimedia.org/wiki/File:UN_General_Assembly_hall.jpg" target="_blank" rel="noopener">UN General Assembly hall</a> · <a href="https://commons.wikimedia.org/wiki/File:Le_Havre_(France),_containers_cranes.JPG" target="_blank" rel="noopener">Le Havre containers cranes</a> · <a href="https://commons.wikimedia.org/wiki/File:International_Women%27s_Day_March_(35430386352).jpg" target="_blank" rel="noopener">International Women’s Day March</a> · <a href="https://commons.wikimedia.org/wiki/File:1917petrogradsoviet_assembly.jpg" target="_blank" rel="noopener">Petrograd Soviet assembly, 1917</a>.</p><div class="bottom"><span>© 2026 MGLMUN’26</span><span class="hash">#FuelUpDreams</span></div>
 </div></footer>
 
 <script src="config.js"></script>
@@ -656,11 +688,10 @@ const COMMITTEES=[
    questions:['Organising the Red Army','Land redistribution and the peasantry','Growing the Communist Party','Responding to crisis updates in real time'],
    facts:[['Type','Crisis committee'],['Period','1917–1922'],['Outcome','Directives and communiqués'],['Study guide','Coming soon']]}
 ];
-const SECRETARIAT=[['Secretary-General','Arya Koçar','Fethiye Bahçeşehir Koleji'],['Deputy Secretary-General','Sude Ataş','Göcek Süleyman Şatır Anadolu Lisesi']];
-const BOARDS={wto:[['Chair','Enes Kılıç','Kayseri / Melikgazi – Osman Ulubaş Köşk Anadolu Lisesi'],['Co-Chair','Elif Ebrar Köroğlu','Kayseri / Talas – Hidayet Aydoğan Sosyal Bilimler Lisesi']],
+const SECRETARIAT=[['Secretary-General','Arya Koçar','Fethiye Bahçeşehir Koleji'],['Director-General','Eren Koçak'],['Deputy Secretary-General','Sude Ataş','Göcek Süleyman Şatır Anadolu Lisesi'],['Deputy Director-General','Öykü Sungur']];
+const BOARDS={wto:[['Under-Secretary-General','Enes Kılıç','Kayseri / Melikgazi – Osman Ulubaş Köşk Anadolu Lisesi'],['President Chair','Zeynep Bulut'],['Co-Chair','Elif Ebrar Köroğlu','Kayseri / Talas – Hidayet Aydoğan Sosyal Bilimler Lisesi']],
   unw:[['Chair','Deniz Özsoy','Dalaman Bahçeşehir Koleji'],['Co-Chair','Rüya Ada Cenan','Datça Şehit Kardeş Yılmazlar Anadolu Lisesi']],
   ps:[['Chair','Murat Kağan Türkmen','Fethiye Belediye Fen Lisesi'],['Co-Chair','Ali Kenan İnan','Fethiye Belediye Fen Lisesi']]};
-const ORG_LEADS=[['Director-General','Eren Koçak'],['Deputy Director-General','Öykü Sungur']];
 const DEPTS=[
   ['Organisation',[['Head of Organisation','İnci Çadır'],['Co-Head of Organisation','Emirhan Gökmen']],[]],
   ['Press & Media',[['Head of Press','Eda Bek'],['Co-Head of Press','Mehmet Efe Kılıç']],[]],
@@ -669,6 +700,7 @@ const DEPTS=[
   ['Logistics',[['Head of Logistics','Hanzade Erbabi'],['Co-Head of Logistics','İnci']],['Deniz Çolakoğlu','Selen Deniz Kurt','Poyraz Deveci','Ares Metin','Ekin Deveci','Aylin Canata']],
   ['Finance',[['Head of Finance','Defne Su Karaisaoğlu'],['Co-Head of Finance','Jerfi Ant Fidan']],['Ecrin Tombak','Ecrin Alacık']],
   ['Technical Support & AV',[['Technical Support & AV','Ömer Faruk Orhon']],[]],
+  ['IT',[['Web Developer & Designer','Enes Kılıç']],[]],
   ['Administrative Staff',[['Head of Administrative Staff','Ahmet Efe Demirci'],['Co-Head of Administrative Staff','Ateş Ertürk']],['Sude Naz Çam','Zeynep Yıldırım','Ekin Nihal Demirel','Buğse İğci','İlayda Tahancı','Emine Dönmez','Cemre Eroğlu']],
   ['Security',[['Head of Security','Barkın Metin']],['Ata Alpay','Mert Yolcu','Şamil Muratov','Nehir Akdeniz','Arda Alacık','Poyraz Güneş','Eymen Aras Korkmaz','Oğuz Kaan Orhon','Atlas Şahin']]
 ];
@@ -683,21 +715,27 @@ const OPENING=Date.UTC(2026,11,4,7,0,0), CLOSING=Date.UTC(2026,11,6,15,0,0);
 /* ═════════ Rendering ═════════ */
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const initials=n=>n.split(/\s+/).filter(Boolean).map(w=>w[0]).filter((_, i, a)=>i===0||i===a.length-1).join('').toLocaleUpperCase('tr');
+// Fotoğraflar Wikimedia Commons'tan (serbest lisans). Yüklenemezse img/*.svg çizimi gösterilir.
+const CM=f=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(f)+'?width=1600';
+const PHOTO={wto:"Le Havre (France), containers cranes.JPG",unw:"International Women's Day March (35430386352).jpg",ps:"1917petrogradsoviet assembly.jpg",hall:"UN General Assembly hall.jpg"};
+const IMG={wto:CM(PHOTO.wto),unw:CM(PHOTO.unw),ps:CM(PHOTO.ps)};
+const FB=id=>`onerror="this.onerror=null;this.src='img/${id}.svg'"`;
+const ALT={wto:'Container cranes at the port of Le Havre',unw:'International Women’s Day march',ps:'Assembly of the Petrograd Soviet, 1917'};
 const PAT={
   wto:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a4166"/><stop offset="1" stop-color="#121d33"/></linearGradient><pattern id="dw" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#cfc9c6" opacity=".22"/></pattern></defs><rect width="400" height="225" fill="url(#gw)"/><rect width="400" height="225" fill="url(#dw)"/><g fill="none" stroke="#cfc9c6" stroke-width="1.2" stroke-dasharray="3 5" opacity=".7"><path d="M40 170 Q150 40 260 120"/><path d="M260 120 Q330 60 380 90"/><path d="M120 200 Q220 150 260 120"/><path d="M60 90 Q170 20 330 60"/></g><g fill="#e8e3e0"><circle cx="40" cy="170" r="3.5"/><circle cx="260" cy="120" r="4.5"/><circle cx="380" cy="90" r="3"/><circle cx="120" cy="200" r="3"/><circle cx="60" cy="90" r="3"/><circle cx="330" cy="60" r="3.5"/></g><circle cx="260" cy="120" r="12" fill="none" stroke="#e8e3e0" opacity=".4"/></svg>`,
   unw:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a2252"/><stop offset="1" stop-color="#3a0f28"/></linearGradient></defs><rect width="400" height="225" fill="url(#gu)"/><g fill="none" stroke="#f3d3dc" opacity=".28">${Array.from({length:12},(_,i)=>`<circle cx="310" cy="80" r="${18+i*18}"/>`).join('')}</g><circle cx="310" cy="80" r="40" fill="#f3d3dc" opacity=".16"/><circle cx="310" cy="80" r="6" fill="#f3d3dc" opacity=".8"/></svg>`,
   ps:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a1f16"/><stop offset="1" stop-color="#3d0807"/></linearGradient></defs><rect width="400" height="225" fill="url(#gp)"/><g fill="#f0c27a" opacity=".2">${Array.from({length:16},(_,i)=>{const a0=Math.PI+i*Math.PI/16,a1=a0+Math.PI/34,cx=330,cy=240,R=600;return `<path d="M${cx} ${cy}L${(cx+Math.cos(a0)*R).toFixed(1)} ${(cy+Math.sin(a0)*R).toFixed(1)}L${(cx+Math.cos(a1)*R).toFixed(1)} ${(cy+Math.sin(a1)*R).toFixed(1)}Z"/>`}).join('')}</g><circle cx="330" cy="240" r="70" fill="#f0c27a" opacity=".22"/></svg>`
 };
-function comCard(c){return `<a class="com" href="#committee-${c.id}"><div class="art">${PAT[c.id]}<span class="tag">${esc(c.tag)}</span><div><div class="nm">${esc(c.name)}</div><div class="fn">${esc(c.full)}</div></div></div><div class="body"><div class="ag"><small>Agenda item</small><p>${esc(c.agenda)}</p></div><p class="desc">${esc(c.short)}</p><span class="more">Read the brief <span aria-hidden="true">→</span></span></div></a>`;}
+function comCard(c){return `<a class="com" href="#committee-${c.id}"><div class="art">${PAT[c.id]}<img class="pic" src="${IMG[c.id]}" ${FB(c.id)} alt="${esc(ALT[c.id])}" loading="lazy"><span class="tag">${esc(c.tag)}</span><div><div class="nm">${esc(c.name)}</div><div class="fn">${esc(c.full)}</div></div></div><div class="body"><div class="ag"><small>Agenda item</small><p>${esc(c.agenda)}</p></div><p class="desc">${esc(c.short)}</p><span class="more">Read the brief <span aria-hidden="true">→</span></span></div></a>`;}
 function person([role,name,school]){return `<div class="person"><div class="mono" aria-hidden="true">${esc(initials(name))}</div><div><small>${esc(role)}</small><b>${esc(name)}</b>${school?`<span>${esc(school)}</span>`:''}</div></div>`;}
 document.querySelectorAll('[data-coms]').forEach(el=>el.innerHTML=COMMITTEES.map(comCard).join(''));
+document.querySelectorAll('[data-strip]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<a href="#committee-${c.id}"><img src="${IMG[c.id]}" alt="" loading="lazy"><span><small>${esc(c.tag)}</small>${esc(c.agenda)}</span></a>`).join(''));
 document.querySelectorAll('[data-secretariat]').forEach(el=>el.innerHTML=SECRETARIAT.map(person).join(''));
-document.querySelectorAll('[data-orgleads]').forEach(el=>el.innerHTML=ORG_LEADS.map(person).join(''));
 document.querySelectorAll('[data-boards]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<div class="board"><h3>${esc(c.name)}<span>${esc(c.tag.split(' · ')[1])}</span></h3><div class="people">${BOARDS[c.id].map(person).join('')}</div></div>`).join(''));
 document.querySelectorAll('[data-depts]').forEach(el=>el.innerHTML=DEPTS.map(([n,leads,mem])=>`<div class="dept"><h3>${esc(n)}</h3><ul>${leads.map(([r,p])=>`<li><small>${esc(r)}</small>${esc(p)}</li>`).join('')}</ul>${mem.length?`<p>${mem.map(esc).join(' · ')}</p>`:''}</div>`).join(''));
 document.querySelectorAll('[data-days]').forEach(el=>el.innerHTML=DAYS.map(([d,date,items])=>`<article class="day"><header><h3>${d}</h3><span>${date}</span></header><ol>${items.map(([t,w,hl])=>`<li${hl?' class="hl"':''}><time>${t}</time><span>${esc(w)}</span></li>`).join('')}</ol></article>`).join(''));
 document.querySelectorAll('[data-com]').forEach(v=>{const c=COMMITTEES.find(x=>x.id===v.dataset.com),others=COMMITTEES.filter(x=>x!==c);
-  v.innerHTML=`<header class="ph dark ${c.id}"><div class="wrap"><a class="crumb" href="#committees">← All committees</a><div class="label">${esc(c.tag)}</div><h1>${esc(c.name)}</h1><p>${esc(c.full)}</p></div></header>
+  v.innerHTML=`<header class="ph dark cover ${c.id}"><img class="pic" src="${IMG[c.id]}" ${FB(c.id)} alt="${esc(ALT[c.id])}"><div class="wrap"><a class="crumb" href="#committees">← All committees</a><div class="label">${esc(c.tag)}</div><h1>${esc(c.name)}</h1><p>${esc(c.full)}</p></div></header>
   <section><div class="wrap detail"><div class="prose"><div class="label">Agenda item</div><h2>${esc(c.agenda)}</h2>${c.body.map(p=>`<p>${esc(p)}</p>`).join('')}<h3>Key questions for delegates</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>
   <h3>Board</h3><div class="people" style="margin-top:0">${BOARDS[c.id].map(person).join('')}</div>
   <h3>Other committees</h3><div class="others">${others.map(o=>`<a href="#committee-${o.id}"><small>${esc(o.tag)}</small><b>${esc(o.name)}</b></a>`).join('')}</div></div>
