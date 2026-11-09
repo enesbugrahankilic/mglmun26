@@ -502,7 +502,7 @@ legend + *{clear:both}
 
   <section><div class="wrap">
     <div class="head"><div><div class="label">Secretariat</div><h2>Led by students, for students</h2></div><a class="link" href="#team">Meet the whole team →</a></div>
-    <div class="people" data-secretariat style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))"></div>
+    <div class="people" data-secretariat style="max-width:780px"></div>
   </div></section>
 
   <section class="band dark"><div class="wrap">
@@ -527,11 +527,10 @@ legend + *{clear:both}
   <header class="ph dark"><div class="wrap"><div class="label">Our team</div><h1>The people behind MGLMUN’26</h1><p>Secretariat, committee boards and the organisation team.</p></div></header>
   <section><div class="wrap">
     <div class="label">Secretariat</div><h2>Secretariat</h2>
-    <div class="people" data-secretariat style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))"></div>
+    <div class="people" data-secretariat style="max-width:780px"></div>
     <div class="sub-h"><div class="label">Committee boards</div><h2>Chairs</h2></div>
     <div class="boards" data-boards></div>
     <div class="sub-h"><div class="label">Organisation team</div><h2>Organisation team</h2></div>
-    <div class="people" data-orgleads style="max-width:780px"></div>
     <div class="depts" data-depts></div>
   </div></section>
 </div>
@@ -689,11 +688,10 @@ const COMMITTEES=[
    questions:['Organising the Red Army','Land redistribution and the peasantry','Growing the Communist Party','Responding to crisis updates in real time'],
    facts:[['Type','Crisis committee'],['Period','1917–1922'],['Outcome','Directives and communiqués'],['Study guide','Coming soon']]}
 ];
-const SECRETARIAT=[['Secretary-General','Arya Koçar','Fethiye Bahçeşehir Koleji'],['Director-General','Eren Koçak'],['Deputy Secretary-General','Sude Ataş','Göcek Süleyman Şatır Anadolu Lisesi']];
+const SECRETARIAT=[['Secretary-General','Arya Koçar','Fethiye Bahçeşehir Koleji'],['Director-General','Eren Koçak'],['Deputy Secretary-General','Sude Ataş','Göcek Süleyman Şatır Anadolu Lisesi'],['Deputy Director-General','Öykü Sungur']];
 const BOARDS={wto:[['Chair','Enes Kılıç','Kayseri / Melikgazi – Osman Ulubaş Köşk Anadolu Lisesi'],['Co-Chair','Elif Ebrar Köroğlu','Kayseri / Talas – Hidayet Aydoğan Sosyal Bilimler Lisesi']],
   unw:[['Chair','Deniz Özsoy','Dalaman Bahçeşehir Koleji'],['Co-Chair','Rüya Ada Cenan','Datça Şehit Kardeş Yılmazlar Anadolu Lisesi']],
   ps:[['Chair','Murat Kağan Türkmen','Fethiye Belediye Fen Lisesi'],['Co-Chair','Ali Kenan İnan','Fethiye Belediye Fen Lisesi']]};
-const ORG_LEADS=[['Deputy Director-General','Öykü Sungur']];
 const DEPTS=[
   ['Organisation',[['Head of Organisation','İnci Çadır'],['Co-Head of Organisation','Emirhan Gökmen']],[]],
   ['Press & Media',[['Head of Press','Eda Bek'],['Co-Head of Press','Mehmet Efe Kılıç']],[]],
@@ -732,7 +730,6 @@ function person([role,name,school]){return `<div class="person"><div class="mono
 document.querySelectorAll('[data-coms]').forEach(el=>el.innerHTML=COMMITTEES.map(comCard).join(''));
 document.querySelectorAll('[data-strip]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<a href="#committee-${c.id}"><img src="${IMG[c.id]}" alt="" loading="lazy"><span><small>${esc(c.tag)}</small>${esc(c.agenda)}</span></a>`).join(''));
 document.querySelectorAll('[data-secretariat]').forEach(el=>el.innerHTML=SECRETARIAT.map(person).join(''));
-document.querySelectorAll('[data-orgleads]').forEach(el=>el.innerHTML=ORG_LEADS.map(person).join(''));
 document.querySelectorAll('[data-boards]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<div class="board"><h3>${esc(c.name)}<span>${esc(c.tag.split(' · ')[1])}</span></h3><div class="people">${BOARDS[c.id].map(person).join('')}</div></div>`).join(''));
 document.querySelectorAll('[data-depts]').forEach(el=>el.innerHTML=DEPTS.map(([n,leads,mem])=>`<div class="dept"><h3>${esc(n)}</h3><ul>${leads.map(([r,p])=>`<li><small>${esc(r)}</small>${esc(p)}</li>`).join('')}</ul>${mem.length?`<p>${mem.map(esc).join(' · ')}</p>`:''}</div>`).join(''));
 document.querySelectorAll('[data-days]').forEach(el=>el.innerHTML=DAYS.map(([d,date,items])=>`<article class="day"><header><h3>${d}</h3><span>${date}</span></header><ol>${items.map(([t,w,hl])=>`<li${hl?' class="hl"':''}><time>${t}</time><span>${esc(w)}</span></li>`).join('')}</ol></article>`).join(''));
