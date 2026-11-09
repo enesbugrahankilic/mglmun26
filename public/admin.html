@@ -262,7 +262,12 @@ const intlTR=p=>{let d=digits(p);if(d.startsWith('0'))d='90'+d.slice(1);else if(
 
 /* ── auth ── */
 async function boot(){
-  const {data:{session}}=await sb.auth.getSession();
+  let {data:{session}}=await sb.auth.getSession();
+  if(session){
+    // Tarayıcıda kalmış eski/geçersiz oturum 401 verir: sunucuda doğrula, geçersizse temizle.
+    const {error}=await sb.auth.getUser();
+    if(error){await sb.auth.signOut({scope:'local'});session=null;}
+  }
   $('login-wrap').hidden=!!session;$('shell').hidden=!session;
   if(session){me=session.user.email;$('who').textContent=me;load();}
   else setTimeout(()=>$('em').focus(),50);
@@ -278,7 +283,10 @@ async function load(keep){
   $('cnt').textContent='Yükleniyor…';
   const {data,error}=await sb.from('applications').select('*').order('created_at',{ascending:false});
   const b=$('banner');
-  if(error){b.hidden=false;b.textContent='Başvurular okunamadı: '+error.message;return;}
+  if(error){
+    if(error.code==='PGRST301'||error.code==='PGRST303'||/jwt/i.test(error.message||'')){
+      await sb.auth.signOut({scope:'local'});all=[];sel=null;toast('Oturum süresi doldu, tekrar giriş yap.');boot();return;}
+    b.hidden=false;b.textContent='Başvurular okunamadı: '+error.message;return;}
   all=data||[];
   b.hidden=all.length>0;
   if(!all.length)b.textContent='Henüz başvuru görünmüyor. Başvuru olduğu halde liste boşsa '+me+' adresi admins tablosunda değildir.';
