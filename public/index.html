@@ -288,6 +288,7 @@ footer a{color:var(--on-dark);text-decoration:none}
 footer a:hover{text-decoration:underline;text-underline-offset:3px}
 footer .brand{margin-bottom:14px}
 footer .bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:20px 26px;border-top:1px solid rgba(207,201,198,.14);font-size:13px}
+footer .credits{margin:0 0 14px;font-size:12px;color:var(--on-dark-2)}footer .credits a{color:inherit}
 footer .hash{color:var(--silver);font-weight:600;letter-spacing:.02em}
 
 /* ───────── Page header (inner views) ───────── */
@@ -459,7 +460,7 @@ legend + *{clear:both}
     </div>
   </div></div>
 
-  <section class="scene" aria-label="The conference floor"><img src="img/hall.svg" alt="Illustration of a Model UN assembly hall with delegates seated in tiers facing the podium" loading="lazy"><div class="wrap">
+  <section class="scene" aria-label="The conference floor"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/UN%20General%20Assembly%20hall.jpg?width=1800" onerror="this.onerror=null;this.src='img/hall.svg'" alt="The United Nations General Assembly hall in New York" loading="lazy"><div class="wrap">
     <blockquote>Three days. Three rooms. <em>One vote</em> at the end of each.</blockquote>
     <div class="who">MGLMUN’26 · Muğla · 4–6 December</div>
   </div></section>
@@ -660,7 +661,7 @@ legend + *{clear:both}
     <div><h4>Conference</h4><ul><li><a href="#committees">Committees</a></li><li><a href="#programme">Programme</a></li><li><a href="#team">Team</a></li><li><a href="#faq">FAQ</a></li></ul></div>
     <div><h4>Committees</h4><ul><li><a href="#committee-wto">WTO</a></li><li><a href="#committee-unw">UN Women</a></li><li><a href="#committee-ps">Petrograd Soviet</a></li><li><a href="#apply-delegate">Apply as a delegate</a></li></ul></div>
   </div>
-  <div class="bottom"><span>© 2026 MGLMUN’26</span><span class="hash">#FuelUpDreams</span></div>
+  <p class="credits">Photos via Wikimedia Commons, used under their stated licences: <a href="https://commons.wikimedia.org/wiki/File:UN_General_Assembly_hall.jpg" target="_blank" rel="noopener">UN General Assembly hall</a> · <a href="https://commons.wikimedia.org/wiki/File:Le_Havre_(France),_containers_cranes.JPG" target="_blank" rel="noopener">Le Havre containers cranes</a> · <a href="https://commons.wikimedia.org/wiki/File:International_Women%27s_Day_March_(35430386352).jpg" target="_blank" rel="noopener">International Women’s Day March</a> · <a href="https://commons.wikimedia.org/wiki/File:1917petrogradsoviet_assembly.jpg" target="_blank" rel="noopener">Petrograd Soviet assembly, 1917</a>.</p><div class="bottom"><span>© 2026 MGLMUN’26</span><span class="hash">#FuelUpDreams</span></div>
 </div></footer>
 
 <script src="config.js"></script>
@@ -715,14 +716,18 @@ const OPENING=Date.UTC(2026,11,4,7,0,0), CLOSING=Date.UTC(2026,11,6,15,0,0);
 /* ═════════ Rendering ═════════ */
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const initials=n=>n.split(/\s+/).filter(Boolean).map(w=>w[0]).filter((_, i, a)=>i===0||i===a.length-1).join('').toLocaleUpperCase('tr');
-const IMG={wto:'img/wto.svg',unw:'img/unw.svg',ps:'img/ps.svg'}; // Gerçek fotoğraf eklemek için: img/ klasörüne koyup buradaki yolu değiştir
-const ALT={wto:'Illustration of a container ship leaving port at dusk, with trade routes drawn across the sky',unw:'Illustration of a crowd of women raising their hands and holding signs reading Equal Rights Now at sunrise',ps:'Illustration of crowds with red banners in front of the Tauride Palace in Petrograd, 1917'};
+// Fotoğraflar Wikimedia Commons'tan (serbest lisans). Yüklenemezse img/*.svg çizimi gösterilir.
+const CM=f=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(f)+'?width=1600';
+const PHOTO={wto:"Le Havre (France), containers cranes.JPG",unw:"International Women's Day March (35430386352).jpg",ps:"1917petrogradsoviet assembly.jpg",hall:"UN General Assembly hall.jpg"};
+const IMG={wto:CM(PHOTO.wto),unw:CM(PHOTO.unw),ps:CM(PHOTO.ps)};
+const FB=id=>`onerror="this.onerror=null;this.src='img/${id}.svg'"`;
+const ALT={wto:'Container cranes at the port of Le Havre',unw:'International Women’s Day march',ps:'Assembly of the Petrograd Soviet, 1917'};
 const PAT={
   wto:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a4166"/><stop offset="1" stop-color="#121d33"/></linearGradient><pattern id="dw" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#cfc9c6" opacity=".22"/></pattern></defs><rect width="400" height="225" fill="url(#gw)"/><rect width="400" height="225" fill="url(#dw)"/><g fill="none" stroke="#cfc9c6" stroke-width="1.2" stroke-dasharray="3 5" opacity=".7"><path d="M40 170 Q150 40 260 120"/><path d="M260 120 Q330 60 380 90"/><path d="M120 200 Q220 150 260 120"/><path d="M60 90 Q170 20 330 60"/></g><g fill="#e8e3e0"><circle cx="40" cy="170" r="3.5"/><circle cx="260" cy="120" r="4.5"/><circle cx="380" cy="90" r="3"/><circle cx="120" cy="200" r="3"/><circle cx="60" cy="90" r="3"/><circle cx="330" cy="60" r="3.5"/></g><circle cx="260" cy="120" r="12" fill="none" stroke="#e8e3e0" opacity=".4"/></svg>`,
   unw:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a2252"/><stop offset="1" stop-color="#3a0f28"/></linearGradient></defs><rect width="400" height="225" fill="url(#gu)"/><g fill="none" stroke="#f3d3dc" opacity=".28">${Array.from({length:12},(_,i)=>`<circle cx="310" cy="80" r="${18+i*18}"/>`).join('')}</g><circle cx="310" cy="80" r="40" fill="#f3d3dc" opacity=".16"/><circle cx="310" cy="80" r="6" fill="#f3d3dc" opacity=".8"/></svg>`,
   ps:`<svg class="pat" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a1f16"/><stop offset="1" stop-color="#3d0807"/></linearGradient></defs><rect width="400" height="225" fill="url(#gp)"/><g fill="#f0c27a" opacity=".2">${Array.from({length:16},(_,i)=>{const a0=Math.PI+i*Math.PI/16,a1=a0+Math.PI/34,cx=330,cy=240,R=600;return `<path d="M${cx} ${cy}L${(cx+Math.cos(a0)*R).toFixed(1)} ${(cy+Math.sin(a0)*R).toFixed(1)}L${(cx+Math.cos(a1)*R).toFixed(1)} ${(cy+Math.sin(a1)*R).toFixed(1)}Z"/>`}).join('')}</g><circle cx="330" cy="240" r="70" fill="#f0c27a" opacity=".22"/></svg>`
 };
-function comCard(c){return `<a class="com" href="#committee-${c.id}"><div class="art">${PAT[c.id]}<img class="pic" src="${IMG[c.id]}" alt="${esc(ALT[c.id])}" loading="lazy"><span class="tag">${esc(c.tag)}</span><div><div class="nm">${esc(c.name)}</div><div class="fn">${esc(c.full)}</div></div></div><div class="body"><div class="ag"><small>Agenda item</small><p>${esc(c.agenda)}</p></div><p class="desc">${esc(c.short)}</p><span class="more">Read the brief <span aria-hidden="true">→</span></span></div></a>`;}
+function comCard(c){return `<a class="com" href="#committee-${c.id}"><div class="art">${PAT[c.id]}<img class="pic" src="${IMG[c.id]}" ${FB(c.id)} alt="${esc(ALT[c.id])}" loading="lazy"><span class="tag">${esc(c.tag)}</span><div><div class="nm">${esc(c.name)}</div><div class="fn">${esc(c.full)}</div></div></div><div class="body"><div class="ag"><small>Agenda item</small><p>${esc(c.agenda)}</p></div><p class="desc">${esc(c.short)}</p><span class="more">Read the brief <span aria-hidden="true">→</span></span></div></a>`;}
 function person([role,name,school]){return `<div class="person"><div class="mono" aria-hidden="true">${esc(initials(name))}</div><div><small>${esc(role)}</small><b>${esc(name)}</b>${school?`<span>${esc(school)}</span>`:''}</div></div>`;}
 document.querySelectorAll('[data-coms]').forEach(el=>el.innerHTML=COMMITTEES.map(comCard).join(''));
 document.querySelectorAll('[data-strip]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<a href="#committee-${c.id}"><img src="${IMG[c.id]}" alt="" loading="lazy"><span><small>${esc(c.tag)}</small>${esc(c.agenda)}</span></a>`).join(''));
@@ -732,7 +737,7 @@ document.querySelectorAll('[data-boards]').forEach(el=>el.innerHTML=COMMITTEES.m
 document.querySelectorAll('[data-depts]').forEach(el=>el.innerHTML=DEPTS.map(([n,leads,mem])=>`<div class="dept"><h3>${esc(n)}</h3><ul>${leads.map(([r,p])=>`<li><small>${esc(r)}</small>${esc(p)}</li>`).join('')}</ul>${mem.length?`<p>${mem.map(esc).join(' · ')}</p>`:''}</div>`).join(''));
 document.querySelectorAll('[data-days]').forEach(el=>el.innerHTML=DAYS.map(([d,date,items])=>`<article class="day"><header><h3>${d}</h3><span>${date}</span></header><ol>${items.map(([t,w,hl])=>`<li${hl?' class="hl"':''}><time>${t}</time><span>${esc(w)}</span></li>`).join('')}</ol></article>`).join(''));
 document.querySelectorAll('[data-com]').forEach(v=>{const c=COMMITTEES.find(x=>x.id===v.dataset.com),others=COMMITTEES.filter(x=>x!==c);
-  v.innerHTML=`<header class="ph dark cover ${c.id}"><img class="pic" src="${IMG[c.id]}" alt="${esc(ALT[c.id])}"><div class="wrap"><a class="crumb" href="#committees">← All committees</a><div class="label">${esc(c.tag)}</div><h1>${esc(c.name)}</h1><p>${esc(c.full)}</p></div></header>
+  v.innerHTML=`<header class="ph dark cover ${c.id}"><img class="pic" src="${IMG[c.id]}" ${FB(c.id)} alt="${esc(ALT[c.id])}"><div class="wrap"><a class="crumb" href="#committees">← All committees</a><div class="label">${esc(c.tag)}</div><h1>${esc(c.name)}</h1><p>${esc(c.full)}</p></div></header>
   <section><div class="wrap detail"><div class="prose"><div class="label">Agenda item</div><h2>${esc(c.agenda)}</h2>${c.body.map(p=>`<p>${esc(p)}</p>`).join('')}<h3>Key questions for delegates</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>
   <h3>Board</h3><div class="people" style="margin-top:0">${BOARDS[c.id].map(person).join('')}</div>
   <h3>Other committees</h3><div class="others">${others.map(o=>`<a href="#committee-${o.id}"><small>${esc(o.tag)}</small><b>${esc(o.name)}</b></a>`).join('')}</div></div>
