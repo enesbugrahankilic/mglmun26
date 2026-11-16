@@ -232,9 +232,9 @@ section{padding-block:clamp(72px,9vw,112px)}
 .day header h3{font-size:28px}
 .day header span{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .day ol{list-style:none;margin:0;padding:0}
-.day li{display:grid;grid-template-columns:60px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.day li{display:grid;grid-template-columns:104px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
 .day li:last-child{border-bottom:0}
-.day time{font-weight:600;font-variant-numeric:tabular-nums;color:var(--maroon-3)}
+.day time{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--maroon-3)}
 .day li.hl{font-weight:600}
 .note{font-size:13.5px;color:var(--ink-3);margin:18px 0 0}
 
@@ -454,7 +454,7 @@ legend + *{clear:both}
   </header>
 
   <div class="count dark" aria-live="off"><div class="wrap">
-    <div class="lbl" id="cd-lbl"><b>Opening Ceremony</b> · Friday 4 December, 10:00</div>
+    <div class="lbl" id="cd-lbl"><b>Opening Ceremony</b> · Friday 4 December, 09:20</div>
     <div class="cd" id="cd" role="timer" aria-label="Time until the Opening Ceremony">
       <div><b id="cd-d">--</b><small>DAYS</small></div><div><b id="cd-h">--</b><small>HRS</small></div><div><b id="cd-m">--</b><small>MIN</small></div><div><b id="cd-s">--</b><small>SEC</small></div>
     </div>
@@ -497,7 +497,7 @@ legend + *{clear:both}
   <section class="sand"><div class="wrap">
     <div class="head"><div><div class="label">Programme</div><h2>Three days on the floor</h2></div><a class="link" href="#programme">Full programme →</a></div>
     <div class="days" data-days></div>
-    <p class="note">Draft programme. Final times will be announced by the Executive Team.</p>
+    <p class="note">All times are Turkey time (UTC+3).</p>
   </div></section>
 
   <section><div class="wrap">
@@ -538,7 +538,7 @@ legend + *{clear:both}
 <!-- ═════════ PROGRAMME ═════════ -->
 <div class="view" data-view="programme" data-title="Programme · MGLMUN’26" hidden>
   <header class="ph dark"><div class="wrap"><div class="label">Programme</div><h1>Three days on the floor</h1><p>Friday 4 to Sunday 6 December 2026.</p></div></header>
-  <section><div class="wrap"><div class="days" data-days style="margin-top:0"></div><p class="note">Draft programme. Final times will be announced by the Executive Team.</p></div></section>
+  <section><div class="wrap"><div class="days" data-days style="margin-top:0"></div><p class="note">All times are Turkey time (UTC+3).</p></div></section>
 </div>
 
 <!-- ═════════ FAQ ═════════ -->
@@ -693,23 +693,23 @@ const BOARDS={wto:[['Under-Secretary-General','Enes Kılıç','Kayseri / Melikga
   unw:[['Chair','Deniz Özsoy','Dalaman Bahçeşehir Koleji'],['Co-Chair','Rüya Ada Cenan','Datça Şehit Kardeş Yılmazlar Anadolu Lisesi']],
   ps:[['Chair','Murat Kağan Türkmen','Fethiye Belediye Fen Lisesi'],['Co-Chair','Ali Kenan İnan','Fethiye Belediye Fen Lisesi']]};
 const DEPTS=[
-  ['Press & Media',[['Head of Press','Eda Bek'],['Co-Head of Press','Mehmet Efe Kılıç']],[]],
+  ['Press & Media',[['Head of Press','Eda Bek']],[]],
   ['Social Media',[['Head of Social Media','Melek Deniz Abacı'],['Co-Head of Social Media','Melek Naz Kaymaz']],['Ecrin Karadağ','İdil Elgün']],
   ['Public Relations',[['Head of PR','Sena Sevim Ak']],['Sertaç Sarı','Ada Ali Akar']],
   ['Logistics',[['Head of Logistics','Hanzade Erbabi'],['Co-Head of Logistics','İnci Çadır']],['Deniz Çolakoğlu','Selen Deniz Kurt','Poyraz Deveci','Ares Metin','Ekin Deveci','Aylin Canata']],
   ['Finance',[['Head of Finance','Defne Su Karaisaoğlu']],['Ecrin Tombak','Ecrin Alacık']],
-  ['IT',[['Web Developer & Designer','Enes Kılıç']],[]],
+  ['IT',[['Head of IT','Mehmet Efe Kılıç'],['Web Developer & Designer','Enes Kılıç']],[]],
   ['Fun',[['Head of Fun','Ekin Naz Akkan']],[]],
   ['Administrative Staff',[['Head of Administrative Staff','Ahmet Efe Demirci']],['Sude Naz Çam','Zeynep Yıldırım','Ekin Nihal Demirel','Buğse İğci','İlayda Tahancı','Emine Dönmez','Cemre Eroğlu']],
   ['Security',[['Head of Security','Barkın Metin']],['Ata Alpay','Mert Yolcu','Şamil Muratov','Nehir Akdeniz','Arda Alacık','Poyraz Güneş','Eymen Aras Korkmaz','Oğuz Kaan Orhon','Atlas Şahin']]
 ];
 const DAYS=[
-  ['Day 1','Fri · 4 Dec',[['09:00','Registration'],['10:00','Opening Ceremony',1],['11:30','Committee Session I'],['13:00','Lunch'],['14:00','Committee Session II']]],
-  ['Day 2','Sat · 5 Dec',[['09:30','Committee Session III'],['12:30','Lunch'],['13:30','Committee Session IV'],['17:00','Committee Session V'],['20:00','Social Event',1]]],
-  ['Day 3','Sun · 6 Dec',[['09:30','Committee Session VI'],['12:00','Voting Procedure'],['14:30','General Assembly'],['16:00','Closing Ceremony',1]]]
+  ['Day 1','Fri · 4 Dec',[['09:00–09:20','Gathering & Registration'],['09:20–10:30','Opening Ceremony',1],['10:45–11:45','Committee Session I'],['12:00–13:00','Committee Session II'],['13:00–14:00','Lunch'],['14:00–15:00','Committee Session III'],['15:15–16:30','Committee Session IV'],['16:45–17:45','Committee Session V']]],
+  ['Day 2','Sat · 5 Dec',[['09:00–10:30','Committee Session VI'],['11:00–12:00','Committee Session VII'],['12:15–13:30','Committee Session VIII'],['13:30–14:30','Lunch'],['14:45–16:00','Committee Session IX']]],
+  ['Day 3','Sun · 6 Dec',[['11:00–12:30','Committee Session X'],['13:00–14:45','Committee Session XI'],['15:00–16:00','Committee Session XII'],['16:30–17:15','Closing Ceremony',1],['18:30','After Party & Activities',1]]]
 ];
-// Opening Ceremony: 4 Dec 2026 10:00 Istanbul (UTC+3)
-const OPENING=Date.UTC(2026,11,4,7,0,0), CLOSING=Date.UTC(2026,11,6,15,0,0);
+// Opening Ceremony: 4 Dec 2026 09:20 Istanbul (UTC+3); closing ceremony ends 6 Dec 17:15
+const OPENING=Date.UTC(2026,11,4,6,20,0), CLOSING=Date.UTC(2026,11,6,14,15,0);
 
 /* ═════════ Rendering ═════════ */
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
