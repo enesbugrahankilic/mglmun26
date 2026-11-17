@@ -82,7 +82,9 @@ em.it{font-style:italic;font-variation-settings:"opsz" 144}
 .notice .wrap{display:flex;justify-content:center;align-items:center;gap:10px 14px;min-height:40px;flex-wrap:wrap;text-align:center;padding-block:6px}
 .notice .dot{width:7px;height:7px;border-radius:50%;background:#59c27b;box-shadow:0 0 0 4px rgba(89,194,123,.18);flex:none}
 .notice a{color:var(--on-dark);font-weight:600;text-underline-offset:3px}
-.nav{position:sticky;top:0;z-index:40;background:rgba(80,8,9,.92);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);color:var(--on-dark);border-bottom:1px solid rgba(207,201,198,.14);padding-top:env(safe-area-inset-top,0px)}
+.nav{position:sticky;top:0;z-index:40;color:var(--on-dark);border-bottom:1px solid rgba(207,201,198,.14);padding-top:env(safe-area-inset-top,0px)}
+/* Blur sits on a pseudo-element: backdrop-filter on .nav itself would make it the containing block for the fixed mobile menu and clip it to the bar's height. */
+.nav::before{content:"";position:absolute;inset:0 0 -1px;z-index:-1;background:rgba(80,8,9,.92);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--on-dark)}
 .brand img{width:40px;height:40px;border-radius:50%}
@@ -103,13 +105,26 @@ em.it{font-style:italic;font-variation-settings:"opsz" 144}
 .nav.open .burger span::after{transform:translateY(-6px) rotate(-45deg)}
 @media (max-width:900px){
   .burger{display:grid}
-  .menu{position:fixed;inset:calc(68px + env(safe-area-inset-top,0px)) 0 0;background:var(--maroon);flex-direction:column;align-items:stretch;gap:0;padding:12px var(--gut) 32px;overflow:auto;visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu{position:fixed;inset:var(--menu-top,calc(68px + env(safe-area-inset-top,0px))) 0 0;background:var(--maroon);flex-direction:column;align-items:stretch;gap:0;padding:12px var(--gut) 32px;overflow:auto;visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
   .nav.open .menu{visibility:visible;opacity:1;transform:none;transition:opacity .2s,transform .2s}
   .menu a{font:500 26px/1.2 var(--serif);padding:16px 4px;border-radius:0;border-bottom:1px solid rgba(207,201,198,.16);color:var(--on-dark)}
   .menu a[aria-current="page"]{background:none;color:#fff}
   .menu a[aria-current="page"]::after{content:" ·";color:var(--silver)}
   .menu .btn{margin:24px 0 0;min-height:54px;font:600 16px/1 var(--sans);border-bottom:0;border-radius:999px}
   body.lock{overflow:hidden}
+}
+@media (max-width:480px){
+  .notice{font-size:12.5px}
+  .notice .nd{display:none}
+  .notice .wrap{gap:4px 10px;padding-block:8px}
+  .nav .wrap{height:64px;gap:10px}
+  .menu{inset:var(--menu-top,calc(64px + env(safe-area-inset-top,0px))) 0 0}
+  .brand{gap:10px;min-width:0}
+  .brand img{width:36px;height:36px}
+  .brand b{font-size:19px}
+  .brand small{font-size:9.5px;letter-spacing:.14em}
+  .menu a{font-size:23px;padding:14px 4px}
+  .hero .label{letter-spacing:.14em;line-height:1.5}
 }
 
 /* ───────── Hero ───────── */
@@ -198,6 +213,7 @@ section{padding-block:clamp(72px,9vw,112px)}
 .scene blockquote{margin:0;max-width:30ch;font:400 clamp(28px,3.6vw,46px)/1.12 var(--serif);letter-spacing:-.01em;text-wrap:balance}
 .scene blockquote em{color:#e6cf9f}
 .scene .who{margin-top:16px;font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-2)}
+@media (max-width:560px){.scene{min-height:380px;padding-bottom:44px}.scene::after{background:linear-gradient(0deg,rgba(20,3,5,.94) 0%,rgba(20,3,5,.62) 55%,rgba(20,3,5,.12) 100%)}}
 .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:#140304}
 .strip a{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;isolation:isolate;color:#fff;text-decoration:none}
 .strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s}
@@ -412,7 +428,7 @@ legend + *{clear:both}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="notice"><div class="wrap"><span class="dot" aria-hidden="true"></span><span>Delegate applications for MGLMUN’26 are open · 4–6 December 2026</span><a href="#apply-delegate">Apply now</a></div></div>
+<div class="notice"><div class="wrap"><span class="dot" aria-hidden="true"></span><span>Delegate applications for MGLMUN’26 are open<span class="nd"> · 4–6 December 2026</span></span><a href="#apply-delegate">Apply now</a></div></div>
 
 <nav class="nav dark" id="nav" aria-label="Main"><div class="wrap">
   <a class="brand" href="#home" aria-label="MGLMUN’26 home"><img src="logo.jpg" alt="" width="40" height="40"><span><b>MGLMUN’26</b><small>Model United Nations</small></span></a>
@@ -753,8 +769,10 @@ document.querySelectorAll('[data-com]').forEach(v=>{const c=COMMITTEES.find(x=>x
 /* ═════════ Navigation ═════════ */
 (function(){
   const nav=document.getElementById('nav'),burger=document.getElementById('burger'),views=[...document.querySelectorAll('.view')],main=document.getElementById('main');
-  function setMenu(open){nav.classList.toggle('open',open);document.body.classList.toggle('lock',open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Close menu':'Open menu');}
+  function setMenu(open){if(open)nav.style.setProperty('--menu-top',Math.max(0,Math.floor(nav.getBoundingClientRect().bottom))+'px');nav.classList.toggle('open',open);document.body.classList.toggle('lock',open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Close menu':'Open menu');}
   burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+  document.getElementById('menu').addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false);});
+  window.addEventListener('resize',()=>{if(innerWidth>900)setMenu(false);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false);});
   let first=true;
   function show(){
