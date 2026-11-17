@@ -252,6 +252,7 @@ section{padding-block:clamp(72px,9vw,112px)}
 .day li:last-child{border-bottom:0}
 .day time{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--maroon-3)}
 .day li.hl{font-weight:600}
+.day li.br{font-size:13.5px;color:var(--ink-3);padding:7px 0}.day li.br time{color:var(--ink-3)}
 .note{font-size:13.5px;color:var(--ink-3);margin:18px 0 0}
 
 /* team */
@@ -720,9 +721,9 @@ const DEPTS=[
   ['Security',[['Head of Security','Barkın Metin']],['Ata Alpay','Mert Yolcu','Şamil Muratov','Nehir Akdeniz','Arda Alacık','Poyraz Güneş','Eymen Aras Korkmaz','Oğuz Kaan Orhon','Atlas Şahin']]
 ];
 const DAYS=[
-  ['Day 1','Fri · 4 Dec',[['09:00–09:20','Gathering & Registration'],['09:20–10:30','Opening Ceremony',1],['10:45–11:45','Committee Session I'],['12:00–13:00','Committee Session II'],['13:00–14:00','Lunch'],['14:00–15:00','Committee Session III'],['15:15–16:30','Committee Session IV'],['16:45–17:45','Committee Session V']]],
-  ['Day 2','Sat · 5 Dec',[['09:00–10:30','Committee Session VI'],['11:00–12:00','Committee Session VII'],['12:15–13:30','Committee Session VIII'],['13:30–14:30','Lunch'],['14:45–16:00','Committee Session IX']]],
-  ['Day 3','Sun · 6 Dec',[['11:00–12:30','Committee Session X'],['13:00–14:45','Committee Session XI'],['15:00–16:00','Committee Session XII'],['16:30–17:15','Closing Ceremony',1],['18:30','After Party & Activities',1]]]
+  ['Day 1','Fri · 4 Dec',[['09:00–09:20','Gathering & Registration'],['09:20–10:30','Opening Ceremony',1],['10:30–10:45','Break',2],['10:45–11:45','Ice Break Session'],['11:45–12:00','Break',2],['12:00–13:00','Workshop Session'],['13:00–14:00','Lunch',2],['14:00–15:00','Committee Session I'],['15:00–15:15','Break',2],['15:15–16:30','Committee Session II'],['16:30–16:45','Break',2],['16:45–17:45','Committee Session III']]],
+  ['Day 2','Sat · 5 Dec',[['09:00–10:30','Committee Session IV'],['10:30–11:00','Break',2],['11:00–12:00','Committee Session V'],['12:00–12:15','Break',2],['12:15–13:30','Committee Session VI'],['13:30–14:30','Lunch',2],['14:30–14:45','Break',2],['14:45–16:00','Committee Session VII']]],
+  ['Day 3','Sun · 6 Dec',[['11:00–12:30','Committee Session VIII'],['12:30–13:00','Break',2],['13:00–14:45','Committee Session IX'],['14:45–15:00','Break',2],['15:00–16:00','Committee Session X'],['16:00–16:30','Break',2],['16:30–17:15','Closing Ceremony',1],['17:15–18:30','Break',2],['18:30','After Party & Activities',1]]]
 ];
 // Opening Ceremony: 4 Dec 2026 09:20 Istanbul (UTC+3); closing ceremony ends 6 Dec 17:15
 const OPENING=Date.UTC(2026,11,4,6,20,0), CLOSING=Date.UTC(2026,11,6,14,15,0);
@@ -748,7 +749,7 @@ document.querySelectorAll('[data-strip]').forEach(el=>el.innerHTML=COMMITTEES.ma
 document.querySelectorAll('[data-secretariat]').forEach(el=>el.innerHTML=SECRETARIAT.map(person).join(''));
 document.querySelectorAll('[data-boards]').forEach(el=>el.innerHTML=COMMITTEES.map(c=>`<div class="board"><h3>${esc(c.name)}<span>${esc(c.tag.split(' · ')[1])}</span></h3><div class="people">${BOARDS[c.id].map(person).join('')}</div></div>`).join(''));
 document.querySelectorAll('[data-depts]').forEach(el=>el.innerHTML=DEPTS.map(([n,leads,mem])=>`<div class="dept"><h3>${esc(n)}</h3><ul>${leads.map(([r,p])=>`<li><small>${esc(r)}</small>${esc(p)}</li>`).join('')}</ul>${mem.length?`<p>${mem.map(esc).join(' · ')}</p>`:''}</div>`).join(''));
-document.querySelectorAll('[data-days]').forEach(el=>el.innerHTML=DAYS.map(([d,date,items])=>`<article class="day"><header><h3>${d}</h3><span>${date}</span></header><ol>${items.map(([t,w,hl])=>`<li${hl?' class="hl"':''}><time>${t}</time><span>${esc(w)}</span></li>`).join('')}</ol></article>`).join(''));
+document.querySelectorAll('[data-days]').forEach(el=>el.innerHTML=DAYS.map(([d,date,items])=>`<article class="day"><header><h3>${d}</h3><span>${date}</span></header><ol>${items.map(([t,w,hl])=>`<li${hl===1?' class="hl"':hl===2?' class="br"':''}><time>${t}</time><span>${esc(w)}</span></li>`).join('')}</ol></article>`).join(''));
 document.querySelectorAll('[data-com]').forEach(v=>{const c=COMMITTEES.find(x=>x.id===v.dataset.com),others=COMMITTEES.filter(x=>x!==c);
   v.innerHTML=`<header class="ph dark cover ${c.id}"><img class="pic" src="${IMG[c.id]}" ${FB(c.id)} alt="${esc(ALT[c.id])}"><div class="wrap"><a class="crumb" href="#committees">← All committees</a><div class="label">${esc(c.tag)}</div><h1>${esc(c.name)}</h1><p>${esc(c.full)}</p></div></header>
   <section><div class="wrap detail"><div class="prose"><div class="label">Agenda item</div><h2>${esc(c.agenda)}</h2>${c.body.map(p=>`<p>${esc(p)}</p>`).join('')}<h3>Key questions for delegates</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>
